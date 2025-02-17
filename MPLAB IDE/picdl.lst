@@ -1,0 +1,2428 @@
+
+
+HI-TECH Software PIC LITE Macro Assembler V9.81 build 7503 
+                                                                                               Thu Oct 10 09:40:16 2024
+
+HI-TECH Software Omniscient Code Generator (Lite mode) build 7503
+     1  0000                     opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 7503"
+     2                           
+     3                           opt pagewidth 120
+     4                           
+     5                           	opt lm
+     6                           
+     7                           	processor	16F877A
+     8                           clrc	macro
+     9                           	bcf	3,0
+    10  0000                     	endm
+    11                           clrz	macro
+    12                           	bcf	3,2
+    13  0000                     	endm
+    14                           setc	macro
+    15                           	bsf	3,0
+    16  0000                     	endm
+    17                           setz	macro
+    18                           	bsf	3,2
+    19  0000                     	endm
+    20                           skipc	macro
+    21                           	btfss	3,0
+    22  0000                     	endm
+    23                           skipz	macro
+    24                           	btfss	3,2
+    25  0000                     	endm
+    26                           skipnc	macro
+    27                           	btfsc	3,0
+    28  0000                     	endm
+    29                           skipnz	macro
+    30                           	btfsc	3,2
+    31  0000                     	endm
+    32  0000                     indf	equ	0
+    33  0000                     indf0	equ	0
+    34  0002                     pc	equ	2
+    35  0002                     pcl	equ	2
+    36  0003                     status	equ	3
+    37  0004                     fsr	equ	4
+    38  0004                     fsr0	equ	4
+    39  0001                     c	equ	1
+    40  0000                     z	equ	0
+    41  000A                     pclath	equ	10
+    42                           # 4 "C:\Users\HP\OneDrive\Documents\PIC\Digital lock\dl.c"
+    43                           	psect config,class=CONFIG,delta=2 ;#
+    44                           # 4 "C:\Users\HP\OneDrive\Documents\PIC\Digital lock\dl.c"
+    45  2007  FF7A               	dw 0xFFFE & 0xFFFB & 0xFFFF & 0xFFFF & 0xFFFF & 0xFF7F & 0xFFFF & 0xFFFF & 0xFFFF ;#
+    46                           	FNCALL	_main,_LCD_Init
+    47                           	FNCALL	_main,_Keypad_Init
+    48                           	FNCALL	_main,_LCD_Clear
+    49                           	FNCALL	_main,_LCD_String
+    50                           	FNCALL	_main,_LCD_Command
+    51                           	FNCALL	_main,_Keypad_GetKey
+    52                           	FNCALL	_main,_LCD_Char
+    53                           	FNCALL	_main,_strcmp
+    54                           	FNCALL	_LCD_String,_LCD_Char
+    55                           	FNCALL	_LCD_Clear,_LCD_Command
+    56                           	FNCALL	_LCD_Init,_LCD_Command
+    57                           	FNROOT	_main
+    58                           	global	_keypad
+    59                           	global	_correct_passcode
+    60                           psect	idataBANK0,class=CODE,space=0,delta=2
+    61                           global __pidataBANK0
+    62  04FC                     __pidataBANK0:
+    63                           	file	"C:\Users\HP\OneDrive\Documents\PIC\Digital lock\dl.c"
+    64                           	line	33
+    65                           
+    66                           ;initializer for _keypad
+    67  04FC  3437               	retlw	037h
+    68  04FD  3438               	retlw	038h
+    69  04FE  3439               	retlw	039h
+    70  04FF  342F               	retlw	02Fh
+    71  0500  3434               	retlw	034h
+    72  0501  3435               	retlw	035h
+    73  0502  3436               	retlw	036h
+    74  0503  342A               	retlw	02Ah
+    75  0504  3431               	retlw	031h
+    76  0505  3432               	retlw	032h
+    77  0506  3433               	retlw	033h
+    78  0507  342D               	retlw	02Dh
+    79  0508  3443               	retlw	043h
+    80  0509  3430               	retlw	030h
+    81  050A  343D               	retlw	03Dh
+    82  050B  342B               	retlw	02Bh
+    83                           	line	21
+    84                           
+    85                           ;initializer for _correct_passcode
+    86  050C  3431               	retlw	031h
+    87  050D  3432               	retlw	032h
+    88  050E  3433               	retlw	033h
+    89  050F  3434               	retlw	034h
+    90  0510  3400               	retlw	0
+    91                           	global	_colloc
+    92                           	global	_index
+    93                           	global	_rowloc
+    94                           	global	_entered_passcode
+    95                           	global	_PORTB
+    96  0006                     _PORTB	set	6
+    97                           	global	_PORTD
+    98  0008                     _PORTD	set	8
+    99                           	global	_RB0
+   100  0030                     _RB0	set	48
+   101                           	global	_RB1
+   102  0031                     _RB1	set	49
+   103                           	global	_RB2
+   104  0032                     _RB2	set	50
+   105                           	global	_RB3
+   106  0033                     _RB3	set	51
+   107                           	global	_RB4
+   108  0034                     _RB4	set	52
+   109                           	global	_RB5
+   110  0035                     _RB5	set	53
+   111                           	global	_RB6
+   112  0036                     _RB6	set	54
+   113                           	global	_RB7
+   114  0037                     _RB7	set	55
+   115                           	global	_RC0
+   116  0038                     _RC0	set	56
+   117                           	global	_RC2
+   118  003A                     _RC2	set	58
+   119                           	global	_RC3
+   120  003B                     _RC3	set	59
+   121                           	global	_OPTION_REG
+   122  0081                     _OPTION_REG	set	129
+   123                           	global	_TRISB
+   124  0086                     _TRISB	set	134
+   125                           	global	_TRISD
+   126  0088                     _TRISD	set	136
+   127                           	global	_TRISB0
+   128  0430                     _TRISB0	set	1072
+   129                           psect	strings,class=STRING,delta=2
+   130                           global __pstrings
+   131  0003                     __pstrings:
+   132                           ;	global	stringdir,stringtab,__stringbase
+   133  0003                     stringtab:
+   134                           ;	String table - string pointers are 1 byte each
+   135  0003                     stringcode:stringdir:
+      + 0003                     stringdir:	
+   136  0003  3000               movlw high(stringdir)
+   137  0004  008A               movwf pclath
+   138  0005  0804               movf fsr,w
+   139  0006  0A84               incf fsr
+   140  0007  0782               	addwf pc
+   141  0008                     __stringbase:
+   142  0008  3400               	retlw	0
+   143                           psect	strings
+   144                           	
+   145  0009                     STR_1:	
+   146  0009  3445               	retlw	69	;'E'
+   147  000A  346E               	retlw	110	;'n'
+   148  000B  3474               	retlw	116	;'t'
+   149  000C  3465               	retlw	101	;'e'
+   150  000D  3472               	retlw	114	;'r'
+   151  000E  3420               	retlw	32	;' '
+   152  000F  3450               	retlw	80	;'P'
+   153  0010  3461               	retlw	97	;'a'
+   154  0011  3473               	retlw	115	;'s'
+   155  0012  3473               	retlw	115	;'s'
+   156  0013  3463               	retlw	99	;'c'
+   157  0014  346F               	retlw	111	;'o'
+   158  0015  3464               	retlw	100	;'d'
+   159  0016  3465               	retlw	101	;'e'
+   160  0017  343A               	retlw	58	;':'
+   161  0018  3400               	retlw	0
+   162                           psect	strings
+   163                           	
+   164  0019                     STR_2:	
+   165  0019  3455               	retlw	85	;'U'
+   166  001A  346E               	retlw	110	;'n'
+   167  001B  346C               	retlw	108	;'l'
+   168  001C  346F               	retlw	111	;'o'
+   169  001D  3463               	retlw	99	;'c'
+   170  001E  346B               	retlw	107	;'k'
+   171  001F  3465               	retlw	101	;'e'
+   172  0020  3464               	retlw	100	;'d'
+   173  0021  3400               	retlw	0
+   174                           psect	strings
+   175                           	
+   176  0022                     STR_3:	
+   177  0022  3445               	retlw	69	;'E'
+   178  0023  3472               	retlw	114	;'r'
+   179  0024  3472               	retlw	114	;'r'
+   180  0025  346F               	retlw	111	;'o'
+   181  0026  3472               	retlw	114	;'r'
+   182  0027  3400               	retlw	0
+   183                           psect	strings
+   184  0009                     STR_4	equ	STR_1+0
+   185                           	file	"picdl.as"
+   186                           	line	#
+   187                           psect cinit,class=CODE,delta=2
+   188                           global start_initialization
+   189  0511                     start_initialization:
+   190                           
+   191                           psect	bssCOMMON,class=COMMON,space=1
+   192                           global __pbssCOMMON
+   193  007B                     __pbssCOMMON:
+   194  007B                     _colloc:
+   195  007B                            ds      1
+   196                           
+   197  007C                     _index:
+   198  007C                            ds      1
+   199                           
+   200  007D                     _rowloc:
+   201  007D                            ds      1
+   202                           
+   203                           psect	bssBANK0,class=BANK0,space=1
+   204                           global __pbssBANK0
+   205  0035                     __pbssBANK0:
+   206  0035                     _entered_passcode:
+   207  0035                            ds      5
+   208                           
+   209                           psect	dataBANK0,class=BANK0,space=1
+   210                           global __pdataBANK0
+   211  0020                     __pdataBANK0:
+   212                           	file	"C:\Users\HP\OneDrive\Documents\PIC\Digital lock\dl.c"
+   213                           	line	33
+   214  0020                     _keypad:
+   215  0020                            ds      16
+   216                           
+   217                           psect	dataBANK0
+   218                           	file	"C:\Users\HP\OneDrive\Documents\PIC\Digital lock\dl.c"
+   219                           	line	21
+   220  0030                     _correct_passcode:
+   221  0030                            ds      5
+   222                           
+   223                           ; Clear objects allocated to COMMON
+   224                           psect cinit,class=CODE,delta=2
+   225  0511  01FB               	clrf	((__pbssCOMMON)+0)&07Fh
+   226  0512  01FC               	clrf	((__pbssCOMMON)+1)&07Fh
+   227  0513  01FD               	clrf	((__pbssCOMMON)+2)&07Fh
+   228                           ; Clear objects allocated to BANK0
+   229                           psect cinit,class=CODE,delta=2
+   230  0514  01B5               	clrf	((__pbssBANK0)+0)&07Fh
+   231  0515  01B6               	clrf	((__pbssBANK0)+1)&07Fh
+   232  0516  01B7               	clrf	((__pbssBANK0)+2)&07Fh
+   233  0517  01B8               	clrf	((__pbssBANK0)+3)&07Fh
+   234  0518  01B9               	clrf	((__pbssBANK0)+4)&07Fh
+   235                           global btemp
+   236                           psect inittext,class=CODE,delta=2
+   237                           global init_fetch,btemp
+   238                           ;	Called with low address in FSR and high address in W
+   239  04EB                     init_fetch:
+   240  04EB  087E               	movf btemp,w
+   241  04EC  008A               	movwf pclath
+   242  04ED  087F               	movf btemp+1,w
+   243  04EE  0082               	movwf pc
+   244                           global init_ram
+   245                           ;Called with:
+   246                           ;	high address of idata address in btemp 
+   247                           ;	low address of idata address in btemp+1 
+   248                           ;	low address of data in FSR
+   249                           ;	high address + 1 of data in btemp-1
+   250  04EF                     init_ram:
+   251  04EF  24EB  120A  118A   	fcall init_fetch
+   252  04F2  0080               	movwf indf,f
+   253  04F3  0A84               	incf fsr,f
+   254  04F4  0804               	movf fsr,w
+   255  04F5  067D               	xorwf btemp-1,w
+   256  04F6  1903               	btfsc status,2
+   257  04F7  3400               	retlw 0
+   258  04F8  0AFF               	incf btemp+1,f
+   259  04F9  1903               	btfsc status,2
+   260  04FA  0AFE               	incf btemp,f
+   261  04FB  2CEF               	goto init_ram
+   262                           ; Initialize objects allocated to BANK0
+   263                           psect cinit,class=CODE,delta=2
+   264                           global init_ram, __pidataBANK0
+   265  0519  1383               	bcf	status, 7	;select IRP bank0
+   266  051A  3035               	movlw low(__pdataBANK0+21)
+   267  051B  00FD               	movwf btemp-1,f
+   268  051C  3004               	movlw high(__pidataBANK0)
+   269  051D  00FE               	movwf btemp,f
+   270  051E  30FC               	movlw low(__pidataBANK0)
+   271  051F  00FF               	movwf btemp+1,f
+   272  0520  3020               	movlw low(__pdataBANK0)
+   273  0521  0084               	movwf fsr,f
+   274  0522  120A  118A  24EF   	fcall init_ram
+              120A  118A         
+   275                           psect cinit,class=CODE,delta=2
+   276                           global end_of_initialization
+   277                           
+   278                           ;End of C runtime variable initialization code
+   279                           
+   280  0527                     end_of_initialization:
+   281  0527  0183               clrf status
+   282  0528  120A  118A  2E4E   ljmp _main	;jump to C main() function
+   283                           psect	cstackCOMMON,class=COMMON,space=1
+   284                           global __pcstackCOMMON
+   285  0070                     __pcstackCOMMON:
+   286                           	global	?_LCD_Init
+   287  0070                     ?_LCD_Init:	; 0 bytes @ 0x0
+   288                           	global	?_Keypad_Init
+   289  0070                     ?_Keypad_Init:	; 0 bytes @ 0x0
+   290                           	global	??_Keypad_Init
+   291  0070                     ??_Keypad_Init:	; 0 bytes @ 0x0
+   292                           	global	?_LCD_Clear
+   293  0070                     ?_LCD_Clear:	; 0 bytes @ 0x0
+   294                           	global	?_LCD_String
+   295  0070                     ?_LCD_String:	; 0 bytes @ 0x0
+   296                           	global	?_LCD_Command
+   297  0070                     ?_LCD_Command:	; 0 bytes @ 0x0
+   298                           	global	??_LCD_Command
+   299  0070                     ??_LCD_Command:	; 0 bytes @ 0x0
+   300                           	global	??_Keypad_GetKey
+   301  0070                     ??_Keypad_GetKey:	; 0 bytes @ 0x0
+   302                           	global	?_LCD_Char
+   303  0070                     ?_LCD_Char:	; 0 bytes @ 0x0
+   304                           	global	??_LCD_Char
+   305  0070                     ??_LCD_Char:	; 0 bytes @ 0x0
+   306                           	global	?_main
+   307  0070                     ?_main:	; 0 bytes @ 0x0
+   308                           	global	?_Keypad_GetKey
+   309  0070                     ?_Keypad_GetKey:	; 1 bytes @ 0x0
+   310                           	global	?_strcmp
+   311  0070                     ?_strcmp:	; 2 bytes @ 0x0
+   312                           	global	strcmp@s2
+   313  0070                     strcmp@s2:	; 1 bytes @ 0x0
+   314  0070                     	ds	2
+   315                           	global	??_strcmp
+   316  0072                     ??_strcmp:	; 0 bytes @ 0x2
+   317  0072                     	ds	1
+   318                           	global	LCD_Command@cmd
+   319  0073                     LCD_Command@cmd:	; 1 bytes @ 0x3
+   320                           	global	LCD_Char@data
+   321  0073                     LCD_Char@data:	; 1 bytes @ 0x3
+   322  0073                     	ds	1
+   323                           	global	??_LCD_Init
+   324  0074                     ??_LCD_Init:	; 0 bytes @ 0x4
+   325                           	global	??_LCD_Clear
+   326  0074                     ??_LCD_Clear:	; 0 bytes @ 0x4
+   327                           	global	??_LCD_String
+   328  0074                     ??_LCD_String:	; 0 bytes @ 0x4
+   329                           	global	strcmp@r
+   330  0074                     strcmp@r:	; 1 bytes @ 0x4
+   331  0074                     	ds	1
+   332                           	global	LCD_String@str
+   333  0075                     LCD_String@str:	; 1 bytes @ 0x5
+   334                           	global	strcmp@s1
+   335  0075                     strcmp@s1:	; 1 bytes @ 0x5
+   336  0075                     	ds	2
+   337                           	global	??_main
+   338  0077                     ??_main:	; 0 bytes @ 0x7
+   339  0077                     	ds	3
+   340                           	global	main@key
+   341  007A                     main@key:	; 1 bytes @ 0xA
+   342  007A                     	ds	1
+   343 ;;Data sizes: Strings 31, constant 0, data 21, bss 8, persistent 0 stack 0
+   344 ;;Auto spaces:   Size  Autos    Used
+   345 ;; COMMON          14     11      14
+   346 ;; BANK0           80      0      26
+   347 ;; BANK1           80      0       0
+   348 ;; BANK3           96      0       0
+   349 ;; BANK2           96      0       0
+   350                           
+   351 ;;
+   352 ;; Pointer list with targets:
+   353                           
+   354 ;; ?_strcmp	int  size(1) Largest target is 0
+   355 ;;
+   356 ;; strcmp@s2	PTR const unsigned char  size(1) Largest target is 5
+   357 ;;		 -> correct_passcode(BANK0[5]), 
+   358 ;;
+   359 ;; strcmp@s1	PTR const unsigned char  size(1) Largest target is 5
+   360 ;;		 -> entered_passcode(BANK0[5]), 
+   361 ;;
+   362 ;; LCD_String@str	PTR const unsigned char  size(1) Largest target is 16
+   363 ;;		 -> STR_4(CODE[16]), STR_3(CODE[6]), STR_2(CODE[9]), STR_1(CODE[16]), 
+   364 ;;
+   365                           
+   366                           
+   367 ;;
+   368 ;; Critical Paths under _main in COMMON
+   369 ;;
+   370 ;;   _main->_LCD_Init
+   371 ;;   _LCD_String->_LCD_Char
+   372 ;;   _LCD_Clear->_LCD_Command
+   373 ;;   _LCD_Init->_LCD_Command
+   374 ;;
+   375 ;; Critical Paths under _main in BANK0
+   376 ;;
+   377 ;;   None.
+   378 ;;
+   379 ;; Critical Paths under _main in BANK1
+   380 ;;
+   381 ;;   None.
+   382 ;;
+   383 ;; Critical Paths under _main in BANK3
+   384 ;;
+   385 ;;   None.
+   386 ;;
+   387 ;; Critical Paths under _main in BANK2
+   388 ;;
+   389 ;;   None.
+   390                           
+   391 ;;
+   392 ;;Main: autosize = 0, tempsize = 3, incstack = 0, save=0
+   393 ;;
+   394                           
+   395 ;;
+   396 ;;Call Graph Tables:
+   397 ;;
+   398 ;; ---------------------------------------------------------------------------------
+   399 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   400 ;; ---------------------------------------------------------------------------------
+   401 ;; (0) _main                                                 4     4      0     399
+   402 ;;                                              7 COMMON     4     4      0
+   403 ;;                           _LCD_Init
+   404 ;;                        _Keypad_Init
+   405 ;;                          _LCD_Clear
+   406 ;;                         _LCD_String
+   407 ;;                        _LCD_Command
+   408 ;;                      _Keypad_GetKey
+   409 ;;                           _LCD_Char
+   410 ;;                             _strcmp
+   411 ;; ---------------------------------------------------------------------------------
+   412 ;; (1) _LCD_String                                           2     2      0      89
+   413 ;;                                              4 COMMON     2     2      0
+   414 ;;                           _LCD_Char
+   415 ;; ---------------------------------------------------------------------------------
+   416 ;; (1) _LCD_Clear                                            2     2      0      44
+   417 ;;                                              4 COMMON     2     2      0
+   418 ;;                        _LCD_Command
+   419 ;; ---------------------------------------------------------------------------------
+   420 ;; (1) _LCD_Init                                             3     3      0      44
+   421 ;;                                              4 COMMON     3     3      0
+   422 ;;                        _LCD_Command
+   423 ;; ---------------------------------------------------------------------------------
+   424 ;; (1) _LCD_Char                                             4     4      0      44
+   425 ;;                                              0 COMMON     4     4      0
+   426 ;; ---------------------------------------------------------------------------------
+   427 ;; (1) _LCD_Command                                          4     4      0      44
+   428 ;;                                              0 COMMON     4     4      0
+   429 ;; ---------------------------------------------------------------------------------
+   430 ;; (1) _strcmp                                               6     4      2      89
+   431 ;;                                              0 COMMON     6     4      2
+   432 ;; ---------------------------------------------------------------------------------
+   433 ;; (1) _Keypad_GetKey                                        3     3      0       0
+   434 ;;                                              0 COMMON     3     3      0
+   435 ;; ---------------------------------------------------------------------------------
+   436 ;; (1) _Keypad_Init                                          1     1      0       0
+   437 ;;                                              0 COMMON     1     1      0
+   438 ;; ---------------------------------------------------------------------------------
+   439 ;; Estimated maximum stack depth 1
+   440 ;; ---------------------------------------------------------------------------------
+   441                           
+   442 ;; Call Graph Graphs:
+   443                           
+   444 ;; _main (ROOT)
+   445 ;;   _LCD_Init
+   446 ;;     _LCD_Command
+   447 ;;   _Keypad_Init
+   448 ;;   _LCD_Clear
+   449 ;;     _LCD_Command
+   450 ;;   _LCD_String
+   451 ;;     _LCD_Char
+   452 ;;   _LCD_Command
+   453 ;;   _Keypad_GetKey
+   454 ;;   _LCD_Char
+   455 ;;   _strcmp
+   456 ;;
+   457                           
+   458 ;; Address spaces:
+   459                           
+   460 ;;Name               Size   Autos  Total    Cost      Usage
+   461 ;;BANK3               60      0       0       9        0.0%
+   462 ;;BITBANK3            60      0       0       8        0.0%
+   463 ;;SFR3                 0      0       0       4        0.0%
+   464 ;;BITSFR3              0      0       0       4        0.0%
+   465 ;;BANK2               60      0       0      11        0.0%
+   466 ;;BITBANK2            60      0       0      10        0.0%
+   467 ;;SFR2                 0      0       0       5        0.0%
+   468 ;;BITSFR2              0      0       0       5        0.0%
+   469 ;;SFR1                 0      0       0       2        0.0%
+   470 ;;BITSFR1              0      0       0       2        0.0%
+   471 ;;BANK1               50      0       0       7        0.0%
+   472 ;;BITBANK1            50      0       0       6        0.0%
+   473 ;;CODE                 0      0       0       0        0.0%
+   474 ;;DATA                 0      0      2A      12        0.0%
+   475 ;;ABS                  0      0      28       3        0.0%
+   476 ;;NULL                 0      0       0       0        0.0%
+   477 ;;STACK                0      0       2       2        0.0%
+   478 ;;BANK0               50      0      1A       5       32.5%
+   479 ;;BITBANK0            50      0       0       4        0.0%
+   480 ;;SFR0                 0      0       0       1        0.0%
+   481 ;;BITSFR0              0      0       0       1        0.0%
+   482 ;;COMMON               E      B       E       1      100.0%
+   483 ;;BITCOMMON            E      0       0       0        0.0%
+   484 ;;EEDATA             100      0       0       0        0.0%
+   485                           
+   486                           	global	_main
+   487                           psect	maintext,global,class=CODE,delta=2
+   488                           global __pmaintext
+   489  064E                     __pmaintext:
+   490                           
+   491 ;; *************** function _main *****************
+   492 ;; Defined at:
+   493 ;;		line 36 in file "C:\Users\HP\OneDrive\Documents\PIC\Digital lock\dl.c"
+   494 ;; Parameters:    Size  Location     Type
+   495 ;;		None
+   496 ;; Auto vars:     Size  Location     Type
+   497 ;;  key             1   10[COMMON] unsigned char 
+   498 ;; Return value:  Size  Location     Type
+   499 ;;		None               void
+   500 ;; Registers used:
+   501 ;;		wreg, fsr0l, fsr0h, status,2, status,0, pclath, cstack
+   502 ;; Tracked objects:
+   503 ;;		On entry : 17F/0
+   504 ;;		On exit  : 0/0
+   505 ;;		Unchanged: 0/0
+   506 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   507 ;;      Params:         0       0       0       0       0
+   508 ;;      Locals:         1       0       0       0       0
+   509 ;;      Temps:          3       0       0       0       0
+   510 ;;      Totals:         4       0       0       0       0
+   511 ;;Total ram usage:        4 bytes
+   512 ;; Hardware stack levels required when called:    2
+   513 ;; This function calls:
+   514 ;;		_LCD_Init
+   515 ;;		_Keypad_Init
+   516 ;;		_LCD_Clear
+   517 ;;		_LCD_String
+   518 ;;		_LCD_Command
+   519 ;;		_Keypad_GetKey
+   520 ;;		_LCD_Char
+   521 ;;		_strcmp
+   522 ;; This function is called by:
+   523 ;;		Startup code after reset
+   524 ;; This function uses a non-reentrant model
+   525 ;;
+   526                           psect	maintext
+   527                           	file	"C:\Users\HP\OneDrive\Documents\PIC\Digital lock\dl.c"
+   528                           	line	36
+   529                           	global	__size_of_main
+   530  00A3                     	__size_of_main	equ	__end_of_main-_main
+   531                           	
+   532  064E                     _main:	
+   533                           	opt	stack 6
+   534                           ; Regs used in _main: [wreg-fsr0h+status,2+status,0+pclath+cstack]
+   535                           	line	38
+   536                           	
+   537  064E                     l2287:	
+   538                           ;dl.c: 38: LCD_Init();
+   539  064E  120A  118A  254C   	fcall	_LCD_Init
+              120A  118A         
+   540                           	line	39
+   541                           ;dl.c: 39: Keypad_Init();
+   542  0653  120A  118A  24D2   	fcall	_Keypad_Init
+              120A  118A         
+   543                           	line	40
+   544                           	
+   545  0658                     l2289:	
+   546                           ;dl.c: 40: TRISB0 = 0;
+   547  0658  1683               	bsf	status, 5	;RP0=1, select bank1
+   548  0659  1303               	bcf	status, 6	;RP1=0, select bank1
+   549  065A  1006               	bcf	(1072/8)^080h,(1072)&7
+   550                           	line	41
+   551                           	
+   552  065B                     l2291:	
+   553                           ;dl.c: 41: TRISD = 0x00;
+   554  065B  0188               	clrf	(136)^080h	;volatile
+   555                           	line	42
+   556                           	
+   557  065C                     l2293:	
+   558                           ;dl.c: 42: RC0 = 0;
+   559  065C  1283               	bcf	status, 5	;RP0=0, select bank0
+   560  065D  1303               	bcf	status, 6	;RP1=0, select bank0
+   561  065E  1007               	bcf	(56/8),(56)&7
+   562                           	line	44
+   563                           	
+   564  065F                     l2295:	
+   565                           ;dl.c: 44: LCD_Clear();
+   566  065F  120A  118A  24DB   	fcall	_LCD_Clear
+              120A  118A         
+   567                           	line	45
+   568                           	
+   569  0664                     l2297:	
+   570                           ;dl.c: 45: LCD_String("Enter Passcode:");
+   571  0664  3001               	movlw	((STR_1-__stringbase))&0ffh
+   572  0665  120A  118A  252B   	fcall	_LCD_String
+              120A  118A         
+   573                           	line	46
+   574                           	
+   575  066A                     l2299:	
+   576                           ;dl.c: 46: _delay((unsigned long)((200)*(20000000/4000.0)));
+   577                           	opt asmopt_off
+   578  066A  3006               movlw  6
+   579  066B  00F9               movwf	((??_main+0)+0+2),f
+   580  066C  300E               movlw	14
+   581  066D  00F8               movwf	((??_main+0)+0+1),f
+   582  066E  30B0               	movlw	176
+   583  066F  00F7               movwf	((??_main+0)+0),f
+   584  0670                     u3267:
+   585  0670  0BF7               	decfsz	((??_main+0)+0),f
+   586  0671  2E70               	goto	u3267
+   587  0672  0BF8               	decfsz	((??_main+0)+0+1),f
+   588  0673  2E70               	goto	u3267
+   589  0674  0BF9               	decfsz	((??_main+0)+0+2),f
+   590  0675  2E70               	goto	u3267
+   591                           opt asmopt_on
+   592                           
+   593  0676  2E77               	goto	l2301
+   594                           	line	48
+   595                           ;dl.c: 48: while(1) {
+   596                           	
+   597  0677                     l715:	
+   598                           	line	49
+   599                           	
+   600  0677                     l2301:	
+   601                           ;dl.c: 49: LCD_Command(0xC7);
+   602  0677  30C7               	movlw	(0C7h)
+   603  0678  120A  118A  259A   	fcall	_LCD_Command
+              120A  118A         
+   604                           	line	50
+   605                           	
+   606  067D                     l2303:	
+   607                           ;dl.c: 50: char key = Keypad_GetKey();
+   608  067D  120A  118A  26F1   	fcall	_Keypad_GetKey
+              120A  118A         
+   609  0682  00F7               	movwf	(??_main+0)+0
+   610  0683  0877               	movf	(??_main+0)+0,w
+   611  0684  00FA               	movwf	(main@key)
+   612                           	line	52
+   613                           	
+   614  0685                     l2305:	
+   615                           ;dl.c: 52: if(key != 0) {
+   616  0685  087A               	movf	(main@key),w
+   617  0686  1D03               	skipz
+   618  0687  2E89               	goto	u3230
+   619  0688  2E77               	goto	l2301
+   620  0689                     u3230:
+   621                           	line	54
+   622                           	
+   623  0689                     l2307:	
+   624                           ;dl.c: 54: LCD_Char('*');
+   625  0689  302A               	movlw	(02Ah)
+   626  068A  120A  118A  25F4   	fcall	_LCD_Char
+              120A  118A         
+   627                           	line	55
+   628                           	
+   629  068F                     l2309:	
+   630                           ;dl.c: 55: entered_passcode[index] = key;
+   631  068F  087A               	movf	(main@key),w
+   632  0690  00F7               	movwf	(??_main+0)+0
+   633  0691  087C               	movf	(_index),w
+   634  0692  3E35               	addlw	_entered_passcode&0ffh
+   635  0693  0084               	movwf	fsr0
+   636  0694  0877               	movf	(??_main+0)+0,w
+   637  0695  1383               	bcf	status, 7	;select IRP bank0
+   638  0696  0080               	movwf	indf
+   639                           	line	56
+   640                           	
+   641  0697                     l2311:	
+   642                           ;dl.c: 56: index++;
+   643  0697  3001               	movlw	(01h)
+   644  0698  00F7               	movwf	(??_main+0)+0
+   645  0699  0877               	movf	(??_main+0)+0,w
+   646  069A  07FC               	addwf	(_index),f
+   647                           	line	59
+   648                           	
+   649  069B                     l2313:	
+   650                           ;dl.c: 59: if (index == 4) {
+   651  069B  087C               	movf	(_index),w
+   652  069C  3A04               	xorlw	04h
+   653  069D  1D03               	skipz
+   654  069E  2EA0               	goto	u3241
+   655  069F  2EA1               	goto	u3240
+   656  06A0                     u3241:
+   657  06A0  2E77               	goto	l2301
+   658  06A1                     u3240:
+   659                           	line	60
+   660                           	
+   661  06A1                     l2315:	
+   662                           ;dl.c: 60: entered_passcode[4] = '\0';
+   663  06A1  1283               	bcf	status, 5	;RP0=0, select bank0
+   664  06A2  1303               	bcf	status, 6	;RP1=0, select bank0
+   665  06A3  01B9               	clrf	0+(_entered_passcode)+04h
+   666                           	line	63
+   667                           	
+   668  06A4                     l2317:	
+   669                           ;dl.c: 63: if (strcmp(entered_passcode, correct_passcode) == 0) {
+   670  06A4  3030               	movlw	(_correct_passcode)&0ffh
+   671  06A5  00F7               	movwf	(??_main+0)+0
+   672  06A6  0877               	movf	(??_main+0)+0,w
+   673  06A7  00F0               	movwf	(?_strcmp)
+   674  06A8  3035               	movlw	(_entered_passcode)&0ffh
+   675  06A9  120A  118A  2571   	fcall	_strcmp
+              120A  118A         
+   676  06AE  0871               	movf	((1+(?_strcmp))),w
+   677  06AF  0470               	iorwf	((0+(?_strcmp))),w
+   678  06B0  1D03               	skipz
+   679  06B1  2EB3               	goto	u3251
+   680  06B2  2EB4               	goto	u3250
+   681  06B3                     u3251:
+   682  06B3  2EC3               	goto	l2325
+   683  06B4                     u3250:
+   684                           	line	64
+   685                           	
+   686  06B4                     l2319:	
+   687                           ;dl.c: 64: LCD_Clear();
+   688  06B4  120A  118A  24DB   	fcall	_LCD_Clear
+              120A  118A         
+   689                           	line	65
+   690                           	
+   691  06B9                     l2321:	
+   692                           ;dl.c: 65: LCD_String("Unlocked");
+   693  06B9  3011               	movlw	((STR_2-__stringbase))&0ffh
+   694  06BA  120A  118A  252B   	fcall	_LCD_String
+              120A  118A         
+   695                           	line	66
+   696                           	
+   697  06BF                     l2323:	
+   698                           ;dl.c: 66: RC0 = 1;
+   699  06BF  1283               	bcf	status, 5	;RP0=0, select bank0
+   700  06C0  1303               	bcf	status, 6	;RP1=0, select bank0
+   701  06C1  1407               	bsf	(56/8),(56)&7
+   702                           	line	67
+   703                           ;dl.c: 67: } else {
+   704  06C2  2ED2               	goto	l2331
+   705                           	
+   706  06C3                     l718:	
+   707                           	line	68
+   708                           	
+   709  06C3                     l2325:	
+   710                           ;dl.c: 68: LCD_Clear();
+   711  06C3  120A  118A  24DB   	fcall	_LCD_Clear
+              120A  118A         
+   712                           	line	69
+   713                           	
+   714  06C8                     l2327:	
+   715                           ;dl.c: 69: LCD_String("Error");
+   716  06C8  301A               	movlw	((STR_3-__stringbase))&0ffh
+   717  06C9  120A  118A  252B   	fcall	_LCD_String
+              120A  118A         
+   718                           	line	70
+   719                           	
+   720  06CE                     l2329:	
+   721                           ;dl.c: 70: RC0 = 0;
+   722  06CE  1283               	bcf	status, 5	;RP0=0, select bank0
+   723  06CF  1303               	bcf	status, 6	;RP1=0, select bank0
+   724  06D0  1007               	bcf	(56/8),(56)&7
+   725  06D1  2ED2               	goto	l2331
+   726                           	line	71
+   727                           	
+   728  06D2                     l719:	
+   729                           	line	72
+   730                           	
+   731  06D2                     l2331:	
+   732                           ;dl.c: 71: }
+   733                           ;dl.c: 72: _delay((unsigned long)((200)*(20000000/4000.0)));
+   734                           	opt asmopt_off
+   735  06D2  3006               movlw  6
+   736  06D3  00F9               movwf	((??_main+0)+0+2),f
+   737  06D4  300E               movlw	14
+   738  06D5  00F8               movwf	((??_main+0)+0+1),f
+   739  06D6  30B0               	movlw	176
+   740  06D7  00F7               movwf	((??_main+0)+0),f
+   741  06D8                     u3277:
+   742  06D8  0BF7               	decfsz	((??_main+0)+0),f
+   743  06D9  2ED8               	goto	u3277
+   744  06DA  0BF8               	decfsz	((??_main+0)+0+1),f
+   745  06DB  2ED8               	goto	u3277
+   746  06DC  0BF9               	decfsz	((??_main+0)+0+2),f
+   747  06DD  2ED8               	goto	u3277
+   748                           opt asmopt_on
+   749                           
+   750                           	line	73
+   751                           	
+   752  06DE                     l2333:	
+   753                           ;dl.c: 73: LCD_Clear();
+   754  06DE  120A  118A  24DB   	fcall	_LCD_Clear
+              120A  118A         
+   755                           	line	74
+   756                           	
+   757  06E3                     l2335:	
+   758                           ;dl.c: 74: LCD_String("Enter Passcode:");
+   759  06E3  3001               	movlw	((STR_4-__stringbase))&0ffh
+   760  06E4  120A  118A  252B   	fcall	_LCD_String
+              120A  118A         
+   761                           	line	75
+   762                           	
+   763  06E9                     l2337:	
+   764                           ;dl.c: 75: index = 0;
+   765  06E9  01FC               	clrf	(_index)
+   766  06EA  2E77               	goto	l2301
+   767                           	line	76
+   768                           	
+   769  06EB                     l717:	
+   770  06EB  2E77               	goto	l2301
+   771                           	line	77
+   772                           	
+   773  06EC                     l716:	
+   774  06EC  2E77               	goto	l2301
+   775                           	line	78
+   776                           	
+   777  06ED                     l720:	
+   778                           	line	48
+   779  06ED  2E77               	goto	l2301
+   780                           	
+   781  06EE                     l721:	
+   782                           	line	79
+   783                           	
+   784  06EE                     l722:	
+   785                           	global	start
+   786  06EE  120A  118A  2800   	ljmp	start
+   787                           	opt stack 0
+   788                           GLOBAL	__end_of_main
+   789  06F1                     	__end_of_main:
+   790 ;; =============== function _main ends ============
+   791                           
+   792                           	signat	_main,88
+   793                           	global	_LCD_String
+   794                           psect	text211,local,class=CODE,delta=2
+   795                           global __ptext211
+   796  052B                     __ptext211:
+   797                           
+   798 ;; *************** function _LCD_String *****************
+   799 ;; Defined at:
+   800 ;;		line 125 in file "C:\Users\HP\OneDrive\Documents\PIC\Digital lock\dl.c"
+   801 ;; Parameters:    Size  Location     Type
+   802 ;;  str             1    wreg     PTR const unsigned char 
+   803 ;;		 -> STR_4(16), STR_3(6), STR_2(9), STR_1(16), 
+   804 ;; Auto vars:     Size  Location     Type
+   805 ;;  str             1    5[COMMON] PTR const unsigned char 
+   806 ;;		 -> STR_4(16), STR_3(6), STR_2(9), STR_1(16), 
+   807 ;; Return value:  Size  Location     Type
+   808 ;;		None               void
+   809 ;; Registers used:
+   810 ;;		wreg, fsr0l, fsr0h, status,2, status,0, pclath, cstack
+   811 ;; Tracked objects:
+   812 ;;		On entry : 0/0
+   813 ;;		On exit  : 0/0
+   814 ;;		Unchanged: 0/0
+   815 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   816 ;;      Params:         0       0       0       0       0
+   817 ;;      Locals:         1       0       0       0       0
+   818 ;;      Temps:          1       0       0       0       0
+   819 ;;      Totals:         2       0       0       0       0
+   820 ;;Total ram usage:        2 bytes
+   821 ;; Hardware stack levels used:    1
+   822 ;; Hardware stack levels required when called:    1
+   823 ;; This function calls:
+   824 ;;		_LCD_Char
+   825 ;; This function is called by:
+   826 ;;		_main
+   827 ;; This function uses a non-reentrant model
+   828 ;;
+   829                           psect	text211
+   830                           	file	"C:\Users\HP\OneDrive\Documents\PIC\Digital lock\dl.c"
+   831                           	line	125
+   832                           	global	__size_of_LCD_String
+   833  0021                     	__size_of_LCD_String	equ	__end_of_LCD_String-_LCD_String
+   834                           	
+   835  052B                     _LCD_String:	
+   836                           	opt	stack 6
+   837                           ; Regs used in _LCD_String: [wreg-fsr0h+status,2+status,0+pclath+cstack]
+   838                           ;LCD_String@str stored from wreg
+   839  052B  00F5               	movwf	(LCD_String@str)
+   840                           	line	126
+   841                           	
+   842  052C                     l2279:	
+   843                           ;dl.c: 126: while(*str) {
+   844  052C  2D3E               	goto	l2285
+   845                           	
+   846  052D                     l735:	
+   847                           	line	127
+   848                           	
+   849  052D                     l2281:	
+   850                           ;dl.c: 127: LCD_Char(*str++);
+   851  052D  0875               	movf	(LCD_String@str),w
+   852  052E  0084               	movwf	fsr0
+   853  052F  120A  118A  2003   	fcall	stringdir
+              120A  118A         
+   854  0534  120A  118A  25F4   	fcall	_LCD_Char
+              120A  118A         
+   855                           	
+   856  0539                     l2283:	
+   857  0539  3001               	movlw	(01h)
+   858  053A  00F4               	movwf	(??_LCD_String+0)+0
+   859  053B  0874               	movf	(??_LCD_String+0)+0,w
+   860  053C  07F5               	addwf	(LCD_String@str),f
+   861  053D  2D3E               	goto	l2285
+   862                           	line	128
+   863                           	
+   864  053E                     l734:	
+   865                           	line	126
+   866                           	
+   867  053E                     l2285:	
+   868  053E  0875               	movf	(LCD_String@str),w
+   869  053F  0084               	movwf	fsr0
+   870  0540  120A  118A  2003   	fcall	stringdir
+              120A  118A         
+   871  0545  3800               	iorlw	0
+   872  0546  1D03               	skipz
+   873  0547  2D49               	goto	u3221
+   874  0548  2D4A               	goto	u3220
+   875  0549                     u3221:
+   876  0549  2D2D               	goto	l2281
+   877  054A                     u3220:
+   878  054A  2D4B               	goto	l737
+   879                           	
+   880  054B                     l736:	
+   881                           	line	129
+   882                           	
+   883  054B                     l737:	
+   884  054B  0008               	return
+   885                           	opt stack 0
+   886                           GLOBAL	__end_of_LCD_String
+   887  054C                     	__end_of_LCD_String:
+   888 ;; =============== function _LCD_String ends ============
+   889                           
+   890                           	signat	_LCD_String,4216
+   891                           	global	_LCD_Clear
+   892                           psect	text212,local,class=CODE,delta=2
+   893                           global __ptext212
+   894  04DB                     __ptext212:
+   895                           
+   896 ;; *************** function _LCD_Clear *****************
+   897 ;; Defined at:
+   898 ;;		line 131 in file "C:\Users\HP\OneDrive\Documents\PIC\Digital lock\dl.c"
+   899 ;; Parameters:    Size  Location     Type
+   900 ;;		None
+   901 ;; Auto vars:     Size  Location     Type
+   902 ;;		None
+   903 ;; Return value:  Size  Location     Type
+   904 ;;		None               void
+   905 ;; Registers used:
+   906 ;;		wreg, status,2, status,0, pclath, cstack
+   907 ;; Tracked objects:
+   908 ;;		On entry : 0/0
+   909 ;;		On exit  : 0/0
+   910 ;;		Unchanged: 0/0
+   911 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   912 ;;      Params:         0       0       0       0       0
+   913 ;;      Locals:         0       0       0       0       0
+   914 ;;      Temps:          2       0       0       0       0
+   915 ;;      Totals:         2       0       0       0       0
+   916 ;;Total ram usage:        2 bytes
+   917 ;; Hardware stack levels used:    1
+   918 ;; Hardware stack levels required when called:    1
+   919 ;; This function calls:
+   920 ;;		_LCD_Command
+   921 ;; This function is called by:
+   922 ;;		_main
+   923 ;; This function uses a non-reentrant model
+   924 ;;
+   925                           psect	text212
+   926                           	file	"C:\Users\HP\OneDrive\Documents\PIC\Digital lock\dl.c"
+   927                           	line	131
+   928                           	global	__size_of_LCD_Clear
+   929  0010                     	__size_of_LCD_Clear	equ	__end_of_LCD_Clear-_LCD_Clear
+   930                           	
+   931  04DB                     _LCD_Clear:	
+   932                           	opt	stack 6
+   933                           ; Regs used in _LCD_Clear: [wreg+status,2+status,0+pclath+cstack]
+   934                           	line	132
+   935                           	
+   936  04DB                     l2275:	
+   937                           ;dl.c: 132: LCD_Command(0x01);
+   938  04DB  3001               	movlw	(01h)
+   939  04DC  120A  118A  259A   	fcall	_LCD_Command
+              120A  118A         
+   940                           	line	133
+   941                           	
+   942  04E1                     l2277:	
+   943                           ;dl.c: 133: _delay((unsigned long)((2)*(20000000/4000.0)));
+   944                           	opt asmopt_off
+   945  04E1  300D               movlw	13
+   946  04E2  00F5               movwf	((??_LCD_Clear+0)+0+1),f
+   947  04E3  30FB               	movlw	251
+   948  04E4  00F4               movwf	((??_LCD_Clear+0)+0),f
+   949  04E5                     u3287:
+   950  04E5  0BF4               	decfsz	((??_LCD_Clear+0)+0),f
+   951  04E6  2CE5               	goto	u3287
+   952  04E7  0BF5               	decfsz	((??_LCD_Clear+0)+0+1),f
+   953  04E8  2CE5               	goto	u3287
+   954  04E9  2CEA               	nop2
+   955                           opt asmopt_on
+   956                           
+   957                           	line	134
+   958                           	
+   959  04EA                     l740:	
+   960  04EA  0008               	return
+   961                           	opt stack 0
+   962                           GLOBAL	__end_of_LCD_Clear
+   963  04EB                     	__end_of_LCD_Clear:
+   964 ;; =============== function _LCD_Clear ends ============
+   965                           
+   966                           	signat	_LCD_Clear,88
+   967                           	global	_LCD_Init
+   968                           psect	text213,local,class=CODE,delta=2
+   969                           global __ptext213
+   970  054C                     __ptext213:
+   971                           
+   972 ;; *************** function _LCD_Init *****************
+   973 ;; Defined at:
+   974 ;;		line 82 in file "C:\Users\HP\OneDrive\Documents\PIC\Digital lock\dl.c"
+   975 ;; Parameters:    Size  Location     Type
+   976 ;;		None
+   977 ;; Auto vars:     Size  Location     Type
+   978 ;;		None
+   979 ;; Return value:  Size  Location     Type
+   980 ;;		None               void
+   981 ;; Registers used:
+   982 ;;		wreg, status,2, status,0, pclath, cstack
+   983 ;; Tracked objects:
+   984 ;;		On entry : 0/0
+   985 ;;		On exit  : 0/0
+   986 ;;		Unchanged: 0/0
+   987 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   988 ;;      Params:         0       0       0       0       0
+   989 ;;      Locals:         0       0       0       0       0
+   990 ;;      Temps:          3       0       0       0       0
+   991 ;;      Totals:         3       0       0       0       0
+   992 ;;Total ram usage:        3 bytes
+   993 ;; Hardware stack levels used:    1
+   994 ;; Hardware stack levels required when called:    1
+   995 ;; This function calls:
+   996 ;;		_LCD_Command
+   997 ;; This function is called by:
+   998 ;;		_main
+   999 ;; This function uses a non-reentrant model
+  1000 ;;
+  1001                           psect	text213
+  1002                           	file	"C:\Users\HP\OneDrive\Documents\PIC\Digital lock\dl.c"
+  1003                           	line	82
+  1004                           	global	__size_of_LCD_Init
+  1005  0025                     	__size_of_LCD_Init	equ	__end_of_LCD_Init-_LCD_Init
+  1006                           	
+  1007  054C                     _LCD_Init:	
+  1008                           	opt	stack 6
+  1009                           ; Regs used in _LCD_Init: [wreg+status,2+status,0+pclath+cstack]
+  1010                           	line	83
+  1011                           	
+  1012  054C                     l2271:	
+  1013                           ;dl.c: 83: LCD_Command(0x38);
+  1014  054C  3038               	movlw	(038h)
+  1015  054D  120A  118A  259A   	fcall	_LCD_Command
+              120A  118A         
+  1016                           	line	84
+  1017                           ;dl.c: 84: LCD_Command(0x0C);
+  1018  0552  300C               	movlw	(0Ch)
+  1019  0553  120A  118A  259A   	fcall	_LCD_Command
+              120A  118A         
+  1020                           	line	85
+  1021                           ;dl.c: 85: LCD_Command(0x06);
+  1022  0558  3006               	movlw	(06h)
+  1023  0559  120A  118A  259A   	fcall	_LCD_Command
+              120A  118A         
+  1024                           	line	86
+  1025                           ;dl.c: 86: LCD_Command(0x80);
+  1026  055E  3080               	movlw	(080h)
+  1027  055F  120A  118A  259A   	fcall	_LCD_Command
+              120A  118A         
+  1028                           	line	87
+  1029                           	
+  1030  0564                     l2273:	
+  1031                           ;dl.c: 87: _delay((unsigned long)((200)*(20000000/4000.0)));
+  1032                           	opt asmopt_off
+  1033  0564  3006               movlw  6
+  1034  0565  00F6               movwf	((??_LCD_Init+0)+0+2),f
+  1035  0566  300E               movlw	14
+  1036  0567  00F5               movwf	((??_LCD_Init+0)+0+1),f
+  1037  0568  30B0               	movlw	176
+  1038  0569  00F4               movwf	((??_LCD_Init+0)+0),f
+  1039  056A                     u3297:
+  1040  056A  0BF4               	decfsz	((??_LCD_Init+0)+0),f
+  1041  056B  2D6A               	goto	u3297
+  1042  056C  0BF5               	decfsz	((??_LCD_Init+0)+0+1),f
+  1043  056D  2D6A               	goto	u3297
+  1044  056E  0BF6               	decfsz	((??_LCD_Init+0)+0+2),f
+  1045  056F  2D6A               	goto	u3297
+  1046                           opt asmopt_on
+  1047                           
+  1048                           	line	88
+  1049                           	
+  1050  0570                     l725:	
+  1051  0570  0008               	return
+  1052                           	opt stack 0
+  1053                           GLOBAL	__end_of_LCD_Init
+  1054  0571                     	__end_of_LCD_Init:
+  1055 ;; =============== function _LCD_Init ends ============
+  1056                           
+  1057                           	signat	_LCD_Init,88
+  1058                           	global	_LCD_Char
+  1059                           psect	text214,local,class=CODE,delta=2
+  1060                           global __ptext214
+  1061  05F4                     __ptext214:
+  1062                           
+  1063 ;; *************** function _LCD_Char *****************
+  1064 ;; Defined at:
+  1065 ;;		line 108 in file "C:\Users\HP\OneDrive\Documents\PIC\Digital lock\dl.c"
+  1066 ;; Parameters:    Size  Location     Type
+  1067 ;;  data            1    wreg     unsigned char 
+  1068 ;; Auto vars:     Size  Location     Type
+  1069 ;;  data            1    3[COMMON] unsigned char 
+  1070 ;; Return value:  Size  Location     Type
+  1071 ;;		None               void
+  1072 ;; Registers used:
+  1073 ;;		wreg, status,2, status,0
+  1074 ;; Tracked objects:
+  1075 ;;		On entry : 0/0
+  1076 ;;		On exit  : 0/0
+  1077 ;;		Unchanged: 0/0
+  1078 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1079 ;;      Params:         0       0       0       0       0
+  1080 ;;      Locals:         1       0       0       0       0
+  1081 ;;      Temps:          3       0       0       0       0
+  1082 ;;      Totals:         4       0       0       0       0
+  1083 ;;Total ram usage:        4 bytes
+  1084 ;; Hardware stack levels used:    1
+  1085 ;; This function calls:
+  1086 ;;		Nothing
+  1087 ;; This function is called by:
+  1088 ;;		_main
+  1089 ;;		_LCD_String
+  1090 ;; This function uses a non-reentrant model
+  1091 ;;
+  1092                           psect	text214
+  1093                           	file	"C:\Users\HP\OneDrive\Documents\PIC\Digital lock\dl.c"
+  1094                           	line	108
+  1095                           	global	__size_of_LCD_Char
+  1096  005A                     	__size_of_LCD_Char	equ	__end_of_LCD_Char-_LCD_Char
+  1097                           	
+  1098  05F4                     _LCD_Char:	
+  1099                           	opt	stack 7
+  1100                           ; Regs used in _LCD_Char: [wreg+status,2+status,0]
+  1101                           ;LCD_Char@data stored from wreg
+  1102  05F4  00F3               	movwf	(LCD_Char@data)
+  1103                           	line	109
+  1104                           	
+  1105  05F5                     l2251:	
+  1106                           ;dl.c: 109: RC2=1;
+  1107  05F5  1283               	bcf	status, 5	;RP0=0, select bank0
+  1108  05F6  1303               	bcf	status, 6	;RP1=0, select bank0
+  1109  05F7  1507               	bsf	(58/8),(58)&7
+  1110                           	line	110
+  1111                           	
+  1112  05F8                     l2253:	
+  1113                           ;dl.c: 110: PORTD&=0x0F;
+  1114  05F8  300F               	movlw	(0Fh)
+  1115  05F9  00F0               	movwf	(??_LCD_Char+0)+0
+  1116  05FA  0870               	movf	(??_LCD_Char+0)+0,w
+  1117  05FB  0588               	andwf	(8),f	;volatile
+  1118                           	line	111
+  1119                           ;dl.c: 111: PORTD|=(data&0xf0);
+  1120  05FC  0873               	movf	(LCD_Char@data),w
+  1121  05FD  39F0               	andlw	0F0h
+  1122  05FE  00F0               	movwf	(??_LCD_Char+0)+0
+  1123  05FF  0870               	movf	(??_LCD_Char+0)+0,w
+  1124  0600  0488               	iorwf	(8),f	;volatile
+  1125                           	line	112
+  1126                           	
+  1127  0601                     l2255:	
+  1128                           ;dl.c: 112: RC3=1;
+  1129  0601  1587               	bsf	(59/8),(59)&7
+  1130                           	line	113
+  1131                           	
+  1132  0602                     l2257:	
+  1133                           ;dl.c: 113: _delay((unsigned long)((100)*(20000000/4000.0)));
+  1134                           	opt asmopt_off
+  1135  0602  3003               movlw  3
+  1136  0603  00F2               movwf	((??_LCD_Char+0)+0+2),f
+  1137  0604  3088               movlw	136
+  1138  0605  00F1               movwf	((??_LCD_Char+0)+0+1),f
+  1139  0606  3056               	movlw	86
+  1140  0607  00F0               movwf	((??_LCD_Char+0)+0),f
+  1141  0608                     u3307:
+  1142  0608  0BF0               	decfsz	((??_LCD_Char+0)+0),f
+  1143  0609  2E08               	goto	u3307
+  1144  060A  0BF1               	decfsz	((??_LCD_Char+0)+0+1),f
+  1145  060B  2E08               	goto	u3307
+  1146  060C  0BF2               	decfsz	((??_LCD_Char+0)+0+2),f
+  1147  060D  2E08               	goto	u3307
+  1148                           opt asmopt_on
+  1149                           
+  1150                           	line	114
+  1151                           	
+  1152  060E                     l2259:	
+  1153                           ;dl.c: 114: RC3=0;
+  1154  060E  1283               	bcf	status, 5	;RP0=0, select bank0
+  1155  060F  1303               	bcf	status, 6	;RP1=0, select bank0
+  1156  0610  1187               	bcf	(59/8),(59)&7
+  1157                           	line	115
+  1158                           	
+  1159  0611                     l2261:	
+  1160                           ;dl.c: 115: _delay((unsigned long)((100)*(20000000/4000.0)));
+  1161                           	opt asmopt_off
+  1162  0611  3003               movlw  3
+  1163  0612  00F2               movwf	((??_LCD_Char+0)+0+2),f
+  1164  0613  3088               movlw	136
+  1165  0614  00F1               movwf	((??_LCD_Char+0)+0+1),f
+  1166  0615  3056               	movlw	86
+  1167  0616  00F0               movwf	((??_LCD_Char+0)+0),f
+  1168  0617                     u3317:
+  1169  0617  0BF0               	decfsz	((??_LCD_Char+0)+0),f
+  1170  0618  2E17               	goto	u3317
+  1171  0619  0BF1               	decfsz	((??_LCD_Char+0)+0+1),f
+  1172  061A  2E17               	goto	u3317
+  1173  061B  0BF2               	decfsz	((??_LCD_Char+0)+0+2),f
+  1174  061C  2E17               	goto	u3317
+  1175                           opt asmopt_on
+  1176                           
+  1177                           	line	116
+  1178                           ;dl.c: 116: PORTD&=0x0f;
+  1179  061D  300F               	movlw	(0Fh)
+  1180  061E  00F0               	movwf	(??_LCD_Char+0)+0
+  1181  061F  0870               	movf	(??_LCD_Char+0)+0,w
+  1182  0620  1283               	bcf	status, 5	;RP0=0, select bank0
+  1183  0621  1303               	bcf	status, 6	;RP1=0, select bank0
+  1184  0622  0588               	andwf	(8),f	;volatile
+  1185                           	line	117
+  1186                           ;dl.c: 117: PORTD|=(data<<4&0xf0);
+  1187  0623  0873               	movf	(LCD_Char@data),w
+  1188  0624  00F0               	movwf	(??_LCD_Char+0)+0
+  1189  0625  3003               	movlw	(04h)-1
+  1190  0626                     u3215:
+  1191  0626  1003               	clrc
+  1192  0627  0DF0               	rlf	(??_LCD_Char+0)+0,f
+  1193  0628  3EFF               	addlw	-1
+  1194  0629  1D03               	skipz
+  1195  062A  2E26               	goto	u3215
+  1196  062B  1003               	clrc
+  1197  062C  0D70               	rlf	(??_LCD_Char+0)+0,w
+  1198  062D  39F0               	andlw	0F0h
+  1199  062E  00F1               	movwf	(??_LCD_Char+1)+0
+  1200  062F  0871               	movf	(??_LCD_Char+1)+0,w
+  1201  0630  0488               	iorwf	(8),f	;volatile
+  1202                           	line	118
+  1203                           	
+  1204  0631                     l2263:	
+  1205                           ;dl.c: 118: RC3=1;
+  1206  0631  1587               	bsf	(59/8),(59)&7
+  1207                           	line	119
+  1208                           	
+  1209  0632                     l2265:	
+  1210                           ;dl.c: 119: _delay((unsigned long)((100)*(20000000/4000.0)));
+  1211                           	opt asmopt_off
+  1212  0632  3003               movlw  3
+  1213  0633  00F2               movwf	((??_LCD_Char+0)+0+2),f
+  1214  0634  3088               movlw	136
+  1215  0635  00F1               movwf	((??_LCD_Char+0)+0+1),f
+  1216  0636  3056               	movlw	86
+  1217  0637  00F0               movwf	((??_LCD_Char+0)+0),f
+  1218  0638                     u3327:
+  1219  0638  0BF0               	decfsz	((??_LCD_Char+0)+0),f
+  1220  0639  2E38               	goto	u3327
+  1221  063A  0BF1               	decfsz	((??_LCD_Char+0)+0+1),f
+  1222  063B  2E38               	goto	u3327
+  1223  063C  0BF2               	decfsz	((??_LCD_Char+0)+0+2),f
+  1224  063D  2E38               	goto	u3327
+  1225                           opt asmopt_on
+  1226                           
+  1227                           	line	120
+  1228                           	
+  1229  063E                     l2267:	
+  1230                           ;dl.c: 120: RC3=0;
+  1231  063E  1283               	bcf	status, 5	;RP0=0, select bank0
+  1232  063F  1303               	bcf	status, 6	;RP1=0, select bank0
+  1233  0640  1187               	bcf	(59/8),(59)&7
+  1234                           	line	121
+  1235                           	
+  1236  0641                     l2269:	
+  1237                           ;dl.c: 121: _delay((unsigned long)((100)*(20000000/4000.0)));
+  1238                           	opt asmopt_off
+  1239  0641  3003               movlw  3
+  1240  0642  00F2               movwf	((??_LCD_Char+0)+0+2),f
+  1241  0643  3088               movlw	136
+  1242  0644  00F1               movwf	((??_LCD_Char+0)+0+1),f
+  1243  0645  3056               	movlw	86
+  1244  0646  00F0               movwf	((??_LCD_Char+0)+0),f
+  1245  0647                     u3337:
+  1246  0647  0BF0               	decfsz	((??_LCD_Char+0)+0),f
+  1247  0648  2E47               	goto	u3337
+  1248  0649  0BF1               	decfsz	((??_LCD_Char+0)+0+1),f
+  1249  064A  2E47               	goto	u3337
+  1250  064B  0BF2               	decfsz	((??_LCD_Char+0)+0+2),f
+  1251  064C  2E47               	goto	u3337
+  1252                           opt asmopt_on
+  1253                           
+  1254                           	line	122
+  1255                           	
+  1256  064D                     l731:	
+  1257  064D  0008               	return
+  1258                           	opt stack 0
+  1259                           GLOBAL	__end_of_LCD_Char
+  1260  064E                     	__end_of_LCD_Char:
+  1261 ;; =============== function _LCD_Char ends ============
+  1262                           
+  1263                           	signat	_LCD_Char,4216
+  1264                           	global	_LCD_Command
+  1265                           psect	text215,local,class=CODE,delta=2
+  1266                           global __ptext215
+  1267  059A                     __ptext215:
+  1268                           
+  1269 ;; *************** function _LCD_Command *****************
+  1270 ;; Defined at:
+  1271 ;;		line 91 in file "C:\Users\HP\OneDrive\Documents\PIC\Digital lock\dl.c"
+  1272 ;; Parameters:    Size  Location     Type
+  1273 ;;  cmd             1    wreg     unsigned char 
+  1274 ;; Auto vars:     Size  Location     Type
+  1275 ;;  cmd             1    3[COMMON] unsigned char 
+  1276 ;; Return value:  Size  Location     Type
+  1277 ;;		None               void
+  1278 ;; Registers used:
+  1279 ;;		wreg, status,2, status,0
+  1280 ;; Tracked objects:
+  1281 ;;		On entry : 0/0
+  1282 ;;		On exit  : 0/0
+  1283 ;;		Unchanged: 0/0
+  1284 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1285 ;;      Params:         0       0       0       0       0
+  1286 ;;      Locals:         1       0       0       0       0
+  1287 ;;      Temps:          3       0       0       0       0
+  1288 ;;      Totals:         4       0       0       0       0
+  1289 ;;Total ram usage:        4 bytes
+  1290 ;; Hardware stack levels used:    1
+  1291 ;; This function calls:
+  1292 ;;		Nothing
+  1293 ;; This function is called by:
+  1294 ;;		_main
+  1295 ;;		_LCD_Init
+  1296 ;;		_LCD_Clear
+  1297 ;; This function uses a non-reentrant model
+  1298 ;;
+  1299                           psect	text215
+  1300                           	file	"C:\Users\HP\OneDrive\Documents\PIC\Digital lock\dl.c"
+  1301                           	line	91
+  1302                           	global	__size_of_LCD_Command
+  1303  005A                     	__size_of_LCD_Command	equ	__end_of_LCD_Command-_LCD_Command
+  1304                           	
+  1305  059A                     _LCD_Command:	
+  1306                           	opt	stack 7
+  1307                           ; Regs used in _LCD_Command: [wreg+status,2+status,0]
+  1308                           ;LCD_Command@cmd stored from wreg
+  1309  059A  00F3               	movwf	(LCD_Command@cmd)
+  1310                           	line	92
+  1311                           	
+  1312  059B                     l2231:	
+  1313                           ;dl.c: 92: RC2=0;
+  1314  059B  1283               	bcf	status, 5	;RP0=0, select bank0
+  1315  059C  1303               	bcf	status, 6	;RP1=0, select bank0
+  1316  059D  1107               	bcf	(58/8),(58)&7
+  1317                           	line	93
+  1318                           	
+  1319  059E                     l2233:	
+  1320                           ;dl.c: 93: PORTD&=0x0F;
+  1321  059E  300F               	movlw	(0Fh)
+  1322  059F  00F0               	movwf	(??_LCD_Command+0)+0
+  1323  05A0  0870               	movf	(??_LCD_Command+0)+0,w
+  1324  05A1  0588               	andwf	(8),f	;volatile
+  1325                           	line	94
+  1326                           ;dl.c: 94: PORTD|=(cmd&0xf0);
+  1327  05A2  0873               	movf	(LCD_Command@cmd),w
+  1328  05A3  39F0               	andlw	0F0h
+  1329  05A4  00F0               	movwf	(??_LCD_Command+0)+0
+  1330  05A5  0870               	movf	(??_LCD_Command+0)+0,w
+  1331  05A6  0488               	iorwf	(8),f	;volatile
+  1332                           	line	95
+  1333                           	
+  1334  05A7                     l2235:	
+  1335                           ;dl.c: 95: RC3=1;
+  1336  05A7  1587               	bsf	(59/8),(59)&7
+  1337                           	line	96
+  1338                           	
+  1339  05A8                     l2237:	
+  1340                           ;dl.c: 96: _delay((unsigned long)((100)*(20000000/4000.0)));
+  1341                           	opt asmopt_off
+  1342  05A8  3003               movlw  3
+  1343  05A9  00F2               movwf	((??_LCD_Command+0)+0+2),f
+  1344  05AA  3088               movlw	136
+  1345  05AB  00F1               movwf	((??_LCD_Command+0)+0+1),f
+  1346  05AC  3056               	movlw	86
+  1347  05AD  00F0               movwf	((??_LCD_Command+0)+0),f
+  1348  05AE                     u3347:
+  1349  05AE  0BF0               	decfsz	((??_LCD_Command+0)+0),f
+  1350  05AF  2DAE               	goto	u3347
+  1351  05B0  0BF1               	decfsz	((??_LCD_Command+0)+0+1),f
+  1352  05B1  2DAE               	goto	u3347
+  1353  05B2  0BF2               	decfsz	((??_LCD_Command+0)+0+2),f
+  1354  05B3  2DAE               	goto	u3347
+  1355                           opt asmopt_on
+  1356                           
+  1357                           	line	97
+  1358                           	
+  1359  05B4                     l2239:	
+  1360                           ;dl.c: 97: RC3=0;
+  1361  05B4  1283               	bcf	status, 5	;RP0=0, select bank0
+  1362  05B5  1303               	bcf	status, 6	;RP1=0, select bank0
+  1363  05B6  1187               	bcf	(59/8),(59)&7
+  1364                           	line	98
+  1365                           	
+  1366  05B7                     l2241:	
+  1367                           ;dl.c: 98: _delay((unsigned long)((100)*(20000000/4000.0)));
+  1368                           	opt asmopt_off
+  1369  05B7  3003               movlw  3
+  1370  05B8  00F2               movwf	((??_LCD_Command+0)+0+2),f
+  1371  05B9  3088               movlw	136
+  1372  05BA  00F1               movwf	((??_LCD_Command+0)+0+1),f
+  1373  05BB  3056               	movlw	86
+  1374  05BC  00F0               movwf	((??_LCD_Command+0)+0),f
+  1375  05BD                     u3357:
+  1376  05BD  0BF0               	decfsz	((??_LCD_Command+0)+0),f
+  1377  05BE  2DBD               	goto	u3357
+  1378  05BF  0BF1               	decfsz	((??_LCD_Command+0)+0+1),f
+  1379  05C0  2DBD               	goto	u3357
+  1380  05C1  0BF2               	decfsz	((??_LCD_Command+0)+0+2),f
+  1381  05C2  2DBD               	goto	u3357
+  1382                           opt asmopt_on
+  1383                           
+  1384                           	line	99
+  1385                           ;dl.c: 99: PORTD&=0x0f;
+  1386  05C3  300F               	movlw	(0Fh)
+  1387  05C4  00F0               	movwf	(??_LCD_Command+0)+0
+  1388  05C5  0870               	movf	(??_LCD_Command+0)+0,w
+  1389  05C6  1283               	bcf	status, 5	;RP0=0, select bank0
+  1390  05C7  1303               	bcf	status, 6	;RP1=0, select bank0
+  1391  05C8  0588               	andwf	(8),f	;volatile
+  1392                           	line	100
+  1393                           ;dl.c: 100: PORTD|=(cmd<<4&0xf0);
+  1394  05C9  0873               	movf	(LCD_Command@cmd),w
+  1395  05CA  00F0               	movwf	(??_LCD_Command+0)+0
+  1396  05CB  3003               	movlw	(04h)-1
+  1397  05CC                     u3205:
+  1398  05CC  1003               	clrc
+  1399  05CD  0DF0               	rlf	(??_LCD_Command+0)+0,f
+  1400  05CE  3EFF               	addlw	-1
+  1401  05CF  1D03               	skipz
+  1402  05D0  2DCC               	goto	u3205
+  1403  05D1  1003               	clrc
+  1404  05D2  0D70               	rlf	(??_LCD_Command+0)+0,w
+  1405  05D3  39F0               	andlw	0F0h
+  1406  05D4  00F1               	movwf	(??_LCD_Command+1)+0
+  1407  05D5  0871               	movf	(??_LCD_Command+1)+0,w
+  1408  05D6  0488               	iorwf	(8),f	;volatile
+  1409                           	line	101
+  1410                           	
+  1411  05D7                     l2243:	
+  1412                           ;dl.c: 101: RC3=1;
+  1413  05D7  1587               	bsf	(59/8),(59)&7
+  1414                           	line	102
+  1415                           	
+  1416  05D8                     l2245:	
+  1417                           ;dl.c: 102: _delay((unsigned long)((100)*(20000000/4000.0)));
+  1418                           	opt asmopt_off
+  1419  05D8  3003               movlw  3
+  1420  05D9  00F2               movwf	((??_LCD_Command+0)+0+2),f
+  1421  05DA  3088               movlw	136
+  1422  05DB  00F1               movwf	((??_LCD_Command+0)+0+1),f
+  1423  05DC  3056               	movlw	86
+  1424  05DD  00F0               movwf	((??_LCD_Command+0)+0),f
+  1425  05DE                     u3367:
+  1426  05DE  0BF0               	decfsz	((??_LCD_Command+0)+0),f
+  1427  05DF  2DDE               	goto	u3367
+  1428  05E0  0BF1               	decfsz	((??_LCD_Command+0)+0+1),f
+  1429  05E1  2DDE               	goto	u3367
+  1430  05E2  0BF2               	decfsz	((??_LCD_Command+0)+0+2),f
+  1431  05E3  2DDE               	goto	u3367
+  1432                           opt asmopt_on
+  1433                           
+  1434                           	line	103
+  1435                           	
+  1436  05E4                     l2247:	
+  1437                           ;dl.c: 103: RC3=0;
+  1438  05E4  1283               	bcf	status, 5	;RP0=0, select bank0
+  1439  05E5  1303               	bcf	status, 6	;RP1=0, select bank0
+  1440  05E6  1187               	bcf	(59/8),(59)&7
+  1441                           	line	104
+  1442                           	
+  1443  05E7                     l2249:	
+  1444                           ;dl.c: 104: _delay((unsigned long)((100)*(20000000/4000.0)));
+  1445                           	opt asmopt_off
+  1446  05E7  3003               movlw  3
+  1447  05E8  00F2               movwf	((??_LCD_Command+0)+0+2),f
+  1448  05E9  3088               movlw	136
+  1449  05EA  00F1               movwf	((??_LCD_Command+0)+0+1),f
+  1450  05EB  3056               	movlw	86
+  1451  05EC  00F0               movwf	((??_LCD_Command+0)+0),f
+  1452  05ED                     u3377:
+  1453  05ED  0BF0               	decfsz	((??_LCD_Command+0)+0),f
+  1454  05EE  2DED               	goto	u3377
+  1455  05EF  0BF1               	decfsz	((??_LCD_Command+0)+0+1),f
+  1456  05F0  2DED               	goto	u3377
+  1457  05F1  0BF2               	decfsz	((??_LCD_Command+0)+0+2),f
+  1458  05F2  2DED               	goto	u3377
+  1459                           opt asmopt_on
+  1460                           
+  1461                           	line	105
+  1462                           	
+  1463  05F3                     l728:	
+  1464  05F3  0008               	return
+  1465                           	opt stack 0
+  1466                           GLOBAL	__end_of_LCD_Command
+  1467  05F4                     	__end_of_LCD_Command:
+  1468 ;; =============== function _LCD_Command ends ============
+  1469                           
+  1470                           	signat	_LCD_Command,4216
+  1471                           	global	_strcmp
+  1472                           psect	text216,local,class=CODE,delta=2
+  1473                           global __ptext216
+  1474  0571                     __ptext216:
+  1475                           
+  1476 ;; *************** function _strcmp *****************
+  1477 ;; Defined at:
+  1478 ;;		line 34 in file "../../common/strcmp.c"
+  1479 ;; Parameters:    Size  Location     Type
+  1480 ;;  s1              1    wreg     PTR const unsigned char 
+  1481 ;;		 -> entered_passcode(5), 
+  1482 ;;  s2              1    0[COMMON] PTR const unsigned char 
+  1483 ;;		 -> correct_passcode(5), 
+  1484 ;; Auto vars:     Size  Location     Type
+  1485 ;;  s1              1    5[COMMON] PTR const unsigned char 
+  1486 ;;		 -> entered_passcode(5), 
+  1487 ;;  r               1    4[COMMON] char 
+  1488 ;; Return value:  Size  Location     Type
+  1489 ;;                  2    0[COMMON] int 
+  1490 ;; Registers used:
+  1491 ;;		wreg, fsr0l, fsr0h, status,2, status,0
+  1492 ;; Tracked objects:
+  1493 ;;		On entry : 0/0
+  1494 ;;		On exit  : 0/0
+  1495 ;;		Unchanged: 0/0
+  1496 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1497 ;;      Params:         2       0       0       0       0
+  1498 ;;      Locals:         2       0       0       0       0
+  1499 ;;      Temps:          2       0       0       0       0
+  1500 ;;      Totals:         6       0       0       0       0
+  1501 ;;Total ram usage:        6 bytes
+  1502 ;; Hardware stack levels used:    1
+  1503 ;; This function calls:
+  1504 ;;		Nothing
+  1505 ;; This function is called by:
+  1506 ;;		_main
+  1507 ;; This function uses a non-reentrant model
+  1508 ;;
+  1509                           psect	text216
+  1510                           	file	"C:\Program Files (x86)\HI-TECH Software\PICC\9.81\sources\strcmp.c"
+  1511                           	line	34
+  1512                           	global	__size_of_strcmp
+  1513  0029                     	__size_of_strcmp	equ	__end_of_strcmp-_strcmp
+  1514                           	
+  1515  0571                     _strcmp:	
+  1516                           	opt	stack 7
+  1517                           ; Regs used in _strcmp: [wreg-fsr0h+status,2+status,0]
+  1518                           ;strcmp@s1 stored from wreg
+  1519  0571  00F5               	movwf	(strcmp@s1)
+  1520                           	line	37
+  1521                           	
+  1522  0572                     l2221:	
+  1523  0572  2D74               	goto	l2223
+  1524                           	
+  1525  0573                     l780:	
+  1526                           	line	38
+  1527  0573  2D74               	goto	l2223
+  1528                           	
+  1529  0574                     l779:	
+  1530                           	line	37
+  1531                           	
+  1532  0574                     l2223:	
+  1533  0574  0875               	movf	(strcmp@s1),w
+  1534  0575  0084               	movwf	fsr
+  1535  0576  1383               	bcf	status, 7	;select IRP bank0
+  1536  0577  0800               	movf	indf,w
+  1537  0578  00F2               	movwf	(??_strcmp+0)+0
+  1538  0579  0870               	movf	(strcmp@s2),w
+  1539  057A  0084               	movwf	fsr0
+  1540  057B  3001               	movlw	01h
+  1541  057C  07F0               	addwf	(strcmp@s2),f
+  1542  057D  0300               	decf	indf,w
+  1543  057E  3AFF               	xorlw	0ffh
+  1544  057F  0772               	addwf	(??_strcmp+0)+0,w
+  1545  0580  00F3               	movwf	(??_strcmp+1)+0
+  1546  0581  0873               	movf	(??_strcmp+1)+0,w
+  1547  0582  00F4               	movwf	(strcmp@r)
+  1548  0583  08F4               	movf	((strcmp@r)),f
+  1549  0584  1D03               	skipz
+  1550  0585  2D87               	goto	u3181
+  1551  0586  2D88               	goto	u3180
+  1552  0587                     u3181:
+  1553  0587  2D93               	goto	l2227
+  1554  0588                     u3180:
+  1555                           	
+  1556  0588                     l2225:	
+  1557  0588  0875               	movf	(strcmp@s1),w
+  1558  0589  0084               	movwf	fsr0
+  1559  058A  3001               	movlw	01h
+  1560  058B  07F5               	addwf	(strcmp@s1),f
+  1561  058C  0880               	movf	indf,f
+  1562  058D  1D03               	skipz
+  1563  058E  2D90               	goto	u3191
+  1564  058F  2D91               	goto	u3190
+  1565  0590                     u3191:
+  1566  0590  2D74               	goto	l2223
+  1567  0591                     u3190:
+  1568  0591  2D93               	goto	l2227
+  1569                           	
+  1570  0592                     l782:	
+  1571  0592  2D93               	goto	l2227
+  1572                           	
+  1573  0593                     l783:	
+  1574                           	line	39
+  1575                           	
+  1576  0593                     l2227:	
+  1577  0593  0874               	movf	(strcmp@r),w
+  1578  0594  00F0               	movwf	(?_strcmp)
+  1579  0595  01F1               	clrf	(?_strcmp+1)
+  1580  0596  1BF0               	btfsc	(?_strcmp),7
+  1581  0597  03F1               	decf	(?_strcmp+1),f
+  1582  0598  2D99               	goto	l784
+  1583                           	
+  1584  0599                     l2229:	
+  1585                           	line	40
+  1586                           	
+  1587  0599                     l784:	
+  1588  0599  0008               	return
+  1589                           	opt stack 0
+  1590                           GLOBAL	__end_of_strcmp
+  1591  059A                     	__end_of_strcmp:
+  1592 ;; =============== function _strcmp ends ============
+  1593                           
+  1594                           	signat	_strcmp,8314
+  1595                           	global	_Keypad_GetKey
+  1596                           psect	text217,local,class=CODE,delta=2
+  1597                           global __ptext217
+  1598  06F1                     __ptext217:
+  1599                           
+  1600 ;; *************** function _Keypad_GetKey *****************
+  1601 ;; Defined at:
+  1602 ;;		line 142 in file "C:\Users\HP\OneDrive\Documents\PIC\Digital lock\dl.c"
+  1603 ;; Parameters:    Size  Location     Type
+  1604 ;;		None
+  1605 ;; Auto vars:     Size  Location     Type
+  1606 ;;		None
+  1607 ;; Return value:  Size  Location     Type
+  1608 ;;                  1    wreg      unsigned char 
+  1609 ;; Registers used:
+  1610 ;;		wreg, fsr0l, fsr0h, status,2, status,0
+  1611 ;; Tracked objects:
+  1612 ;;		On entry : 0/0
+  1613 ;;		On exit  : 0/0
+  1614 ;;		Unchanged: 0/0
+  1615 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1616 ;;      Params:         0       0       0       0       0
+  1617 ;;      Locals:         0       0       0       0       0
+  1618 ;;      Temps:          3       0       0       0       0
+  1619 ;;      Totals:         3       0       0       0       0
+  1620 ;;Total ram usage:        3 bytes
+  1621 ;; Hardware stack levels used:    1
+  1622 ;; This function calls:
+  1623 ;;		Nothing
+  1624 ;; This function is called by:
+  1625 ;;		_main
+  1626 ;; This function uses a non-reentrant model
+  1627 ;;
+  1628                           psect	text217
+  1629                           	file	"C:\Users\HP\OneDrive\Documents\PIC\Digital lock\dl.c"
+  1630                           	line	142
+  1631                           	global	__size_of_Keypad_GetKey
+  1632  010F                     	__size_of_Keypad_GetKey	equ	__end_of_Keypad_GetKey-_Keypad_GetKey
+  1633                           	
+  1634  06F1                     _Keypad_GetKey:	
+  1635                           	opt	stack 7
+  1636                           ; Regs used in _Keypad_GetKey: [wreg-fsr0h+status,2+status,0]
+  1637                           	line	143
+  1638                           	
+  1639  06F1                     l2135:	
+  1640                           ;dl.c: 143: PORTB=0x00;
+  1641  06F1  1283               	bcf	status, 5	;RP0=0, select bank0
+  1642  06F2  1303               	bcf	status, 6	;RP1=0, select bank0
+  1643  06F3  0186               	clrf	(6)	;volatile
+  1644                           	line	144
+  1645                           ;dl.c: 144: while(RB4&&RB5&&RB6&&RB7);
+  1646  06F4  2EF5               	goto	l746
+  1647                           	
+  1648  06F5                     l747:	
+  1649                           	
+  1650  06F5                     l746:	
+  1651  06F5  1E06               	btfss	(52/8),(52)&7
+  1652  06F6  2EF8               	goto	u2701
+  1653  06F7  2EF9               	goto	u2700
+  1654  06F8                     u2701:
+  1655  06F8  2F77               	goto	l751
+  1656  06F9                     u2700:
+  1657                           	
+  1658  06F9                     l2137:	
+  1659  06F9  1E86               	btfss	(53/8),(53)&7
+  1660  06FA  2EFC               	goto	u2711
+  1661  06FB  2EFD               	goto	u2710
+  1662  06FC                     u2711:
+  1663  06FC  2F77               	goto	l751
+  1664  06FD                     u2710:
+  1665                           	
+  1666  06FD                     l2139:	
+  1667  06FD  1F06               	btfss	(54/8),(54)&7
+  1668  06FE  2F00               	goto	u2721
+  1669  06FF  2F01               	goto	u2720
+  1670  0700                     u2721:
+  1671  0700  2F77               	goto	l751
+  1672  0701                     u2720:
+  1673                           	
+  1674  0701                     l2141:	
+  1675  0701  1B86               	btfsc	(55/8),(55)&7
+  1676  0702  2F04               	goto	u2731
+  1677  0703  2F05               	goto	u2730
+  1678  0704                     u2731:
+  1679  0704  2EF5               	goto	l746
+  1680  0705                     u2730:
+  1681  0705  2F77               	goto	l751
+  1682                           	
+  1683  0706                     l749:	
+  1684  0706  2F77               	goto	l751
+  1685                           	
+  1686  0707                     l750:	
+  1687                           	line	145
+  1688                           ;dl.c: 145: while(!RB4||!RB5||!RB6||!RB7) {
+  1689  0707  2F77               	goto	l751
+  1690                           	
+  1691  0708                     l752:	
+  1692                           	line	146
+  1693                           ;dl.c: 146: RB0=0;
+  1694  0708  1006               	bcf	(48/8),(48)&7
+  1695                           	line	147
+  1696                           ;dl.c: 147: RB1=RB2=RB3=1;
+  1697  0709  1586               	bsf	(51/8),(51)&7
+  1698  070A  1986               	btfsc	(51/8),(51)&7
+  1699  070B  2F0D               	goto	u2741
+  1700  070C  2F11               	goto	u2740
+  1701                           	
+  1702  070D                     u2741:
+  1703  070D  1283               	bcf	status, 5	;RP0=0, select bank0
+  1704  070E  1303               	bcf	status, 6	;RP1=0, select bank0
+  1705  070F  1506               	bsf	(50/8),(50)&7
+  1706  0710  2F14               	goto	u2754
+  1707  0711                     u2740:
+  1708  0711  1283               	bcf	status, 5	;RP0=0, select bank0
+  1709  0712  1303               	bcf	status, 6	;RP1=0, select bank0
+  1710  0713  1106               	bcf	(50/8),(50)&7
+  1711  0714                     u2754:
+  1712  0714  1906               	btfsc	(50/8),(50)&7
+  1713  0715  2F17               	goto	u2751
+  1714  0716  2F1B               	goto	u2750
+  1715                           	
+  1716  0717                     u2751:
+  1717  0717  1283               	bcf	status, 5	;RP0=0, select bank0
+  1718  0718  1303               	bcf	status, 6	;RP1=0, select bank0
+  1719  0719  1486               	bsf	(49/8),(49)&7
+  1720  071A  2F1E               	goto	u2764
+  1721  071B                     u2750:
+  1722  071B  1283               	bcf	status, 5	;RP0=0, select bank0
+  1723  071C  1303               	bcf	status, 6	;RP1=0, select bank0
+  1724  071D  1086               	bcf	(49/8),(49)&7
+  1725  071E                     u2764:
+  1726                           	line	148
+  1727                           ;dl.c: 148: if(!RB4||!RB5||!RB6||!RB7) {
+  1728  071E  1E06               	btfss	(52/8),(52)&7
+  1729  071F  2F21               	goto	u2771
+  1730  0720  2F22               	goto	u2770
+  1731  0721                     u2771:
+  1732  0721  2F2E               	goto	l755
+  1733  0722                     u2770:
+  1734                           	
+  1735  0722                     l2143:	
+  1736  0722  1E86               	btfss	(53/8),(53)&7
+  1737  0723  2F25               	goto	u2781
+  1738  0724  2F26               	goto	u2780
+  1739  0725                     u2781:
+  1740  0725  2F2E               	goto	l755
+  1741  0726                     u2780:
+  1742                           	
+  1743  0726                     l2145:	
+  1744  0726  1F06               	btfss	(54/8),(54)&7
+  1745  0727  2F29               	goto	u2791
+  1746  0728  2F2A               	goto	u2790
+  1747  0729                     u2791:
+  1748  0729  2F2E               	goto	l755
+  1749  072A                     u2790:
+  1750                           	
+  1751  072A                     l2147:	
+  1752  072A  1B86               	btfsc	(55/8),(55)&7
+  1753  072B  2F2D               	goto	u2801
+  1754  072C  2F2E               	goto	u2800
+  1755  072D                     u2801:
+  1756  072D  2F30               	goto	l753
+  1757  072E                     u2800:
+  1758                           	
+  1759  072E                     l755:	
+  1760                           	line	149
+  1761                           ;dl.c: 149: rowloc=0;
+  1762  072E  01FD               	clrf	(_rowloc)
+  1763                           	line	150
+  1764                           ;dl.c: 150: break;
+  1765  072F  2F87               	goto	l756
+  1766                           	line	151
+  1767                           	
+  1768  0730                     l753:	
+  1769                           	line	152
+  1770                           ;dl.c: 151: }
+  1771                           ;dl.c: 152: RB1=0;RB0=1;
+  1772  0730  1086               	bcf	(49/8),(49)&7
+  1773  0731  1406               	bsf	(48/8),(48)&7
+  1774                           	line	153
+  1775                           ;dl.c: 153: if(!RB4||!RB5||!RB6||!RB7) {
+  1776  0732  1E06               	btfss	(52/8),(52)&7
+  1777  0733  2F35               	goto	u2811
+  1778  0734  2F36               	goto	u2810
+  1779  0735                     u2811:
+  1780  0735  2F43               	goto	l2155
+  1781  0736                     u2810:
+  1782                           	
+  1783  0736                     l2149:	
+  1784  0736  1E86               	btfss	(53/8),(53)&7
+  1785  0737  2F39               	goto	u2821
+  1786  0738  2F3A               	goto	u2820
+  1787  0739                     u2821:
+  1788  0739  2F43               	goto	l2155
+  1789  073A                     u2820:
+  1790                           	
+  1791  073A                     l2151:	
+  1792  073A  1F06               	btfss	(54/8),(54)&7
+  1793  073B  2F3D               	goto	u2831
+  1794  073C  2F3E               	goto	u2830
+  1795  073D                     u2831:
+  1796  073D  2F43               	goto	l2155
+  1797  073E                     u2830:
+  1798                           	
+  1799  073E                     l2153:	
+  1800  073E  1B86               	btfsc	(55/8),(55)&7
+  1801  073F  2F41               	goto	u2841
+  1802  0740  2F42               	goto	u2840
+  1803  0741                     u2841:
+  1804  0741  2F47               	goto	l757
+  1805  0742                     u2840:
+  1806  0742  2F43               	goto	l2155
+  1807                           	
+  1808  0743                     l759:	
+  1809                           	line	154
+  1810                           	
+  1811  0743                     l2155:	
+  1812                           ;dl.c: 154: rowloc=1;
+  1813  0743  01FD               	clrf	(_rowloc)
+  1814  0744  1403               	bsf	status,0
+  1815  0745  0DFD               	rlf	(_rowloc),f
+  1816                           	line	155
+  1817                           ;dl.c: 155: break;
+  1818  0746  2F87               	goto	l756
+  1819                           	line	156
+  1820                           	
+  1821  0747                     l757:	
+  1822                           	line	157
+  1823                           ;dl.c: 156: }
+  1824                           ;dl.c: 157: RB2=0;RB1=1;
+  1825  0747  1106               	bcf	(50/8),(50)&7
+  1826  0748  1486               	bsf	(49/8),(49)&7
+  1827                           	line	158
+  1828                           ;dl.c: 158: if(!RB4||!RB5||!RB6||!RB7) {
+  1829  0749  1E06               	btfss	(52/8),(52)&7
+  1830  074A  2F4C               	goto	u2851
+  1831  074B  2F4D               	goto	u2850
+  1832  074C                     u2851:
+  1833  074C  2F5A               	goto	l2163
+  1834  074D                     u2850:
+  1835                           	
+  1836  074D                     l2157:	
+  1837  074D  1E86               	btfss	(53/8),(53)&7
+  1838  074E  2F50               	goto	u2861
+  1839  074F  2F51               	goto	u2860
+  1840  0750                     u2861:
+  1841  0750  2F5A               	goto	l2163
+  1842  0751                     u2860:
+  1843                           	
+  1844  0751                     l2159:	
+  1845  0751  1F06               	btfss	(54/8),(54)&7
+  1846  0752  2F54               	goto	u2871
+  1847  0753  2F55               	goto	u2870
+  1848  0754                     u2871:
+  1849  0754  2F5A               	goto	l2163
+  1850  0755                     u2870:
+  1851                           	
+  1852  0755                     l2161:	
+  1853  0755  1B86               	btfsc	(55/8),(55)&7
+  1854  0756  2F58               	goto	u2881
+  1855  0757  2F59               	goto	u2880
+  1856  0758                     u2881:
+  1857  0758  2F5F               	goto	l760
+  1858  0759                     u2880:
+  1859  0759  2F5A               	goto	l2163
+  1860                           	
+  1861  075A                     l762:	
+  1862                           	line	159
+  1863                           	
+  1864  075A                     l2163:	
+  1865                           ;dl.c: 159: rowloc=2;
+  1866  075A  3002               	movlw	(02h)
+  1867  075B  00F0               	movwf	(??_Keypad_GetKey+0)+0
+  1868  075C  0870               	movf	(??_Keypad_GetKey+0)+0,w
+  1869  075D  00FD               	movwf	(_rowloc)
+  1870                           	line	160
+  1871                           ;dl.c: 160: break;
+  1872  075E  2F87               	goto	l756
+  1873                           	line	161
+  1874                           	
+  1875  075F                     l760:	
+  1876                           	line	162
+  1877                           ;dl.c: 161: }
+  1878                           ;dl.c: 162: RB3=0; RB2=1;
+  1879  075F  1186               	bcf	(51/8),(51)&7
+  1880  0760  1506               	bsf	(50/8),(50)&7
+  1881                           	line	163
+  1882                           ;dl.c: 163: if(!RB4||!RB5||!RB6||!RB7){
+  1883  0761  1E06               	btfss	(52/8),(52)&7
+  1884  0762  2F64               	goto	u2891
+  1885  0763  2F65               	goto	u2890
+  1886  0764                     u2891:
+  1887  0764  2F72               	goto	l2171
+  1888  0765                     u2890:
+  1889                           	
+  1890  0765                     l2165:	
+  1891  0765  1E86               	btfss	(53/8),(53)&7
+  1892  0766  2F68               	goto	u2901
+  1893  0767  2F69               	goto	u2900
+  1894  0768                     u2901:
+  1895  0768  2F72               	goto	l2171
+  1896  0769                     u2900:
+  1897                           	
+  1898  0769                     l2167:	
+  1899  0769  1F06               	btfss	(54/8),(54)&7
+  1900  076A  2F6C               	goto	u2911
+  1901  076B  2F6D               	goto	u2910
+  1902  076C                     u2911:
+  1903  076C  2F72               	goto	l2171
+  1904  076D                     u2910:
+  1905                           	
+  1906  076D                     l2169:	
+  1907  076D  1B86               	btfsc	(55/8),(55)&7
+  1908  076E  2F70               	goto	u2921
+  1909  076F  2F71               	goto	u2920
+  1910  0770                     u2921:
+  1911  0770  2F77               	goto	l751
+  1912  0771                     u2920:
+  1913  0771  2F72               	goto	l2171
+  1914                           	
+  1915  0772                     l765:	
+  1916                           	line	164
+  1917                           	
+  1918  0772                     l2171:	
+  1919                           ;dl.c: 164: rowloc=3;
+  1920  0772  3003               	movlw	(03h)
+  1921  0773  00F0               	movwf	(??_Keypad_GetKey+0)+0
+  1922  0774  0870               	movf	(??_Keypad_GetKey+0)+0,w
+  1923  0775  00FD               	movwf	(_rowloc)
+  1924                           	line	165
+  1925                           ;dl.c: 165: break;
+  1926  0776  2F87               	goto	l756
+  1927                           	line	166
+  1928                           	
+  1929  0777                     l763:	
+  1930                           	line	167
+  1931                           	
+  1932  0777                     l751:	
+  1933                           	line	145
+  1934  0777  1E06               	btfss	(52/8),(52)&7
+  1935  0778  2F7A               	goto	u2931
+  1936  0779  2F7B               	goto	u2930
+  1937  077A                     u2931:
+  1938  077A  2F08               	goto	l752
+  1939  077B                     u2930:
+  1940                           	
+  1941  077B                     l2173:	
+  1942  077B  1E86               	btfss	(53/8),(53)&7
+  1943  077C  2F7E               	goto	u2941
+  1944  077D  2F7F               	goto	u2940
+  1945  077E                     u2941:
+  1946  077E  2F08               	goto	l752
+  1947  077F                     u2940:
+  1948                           	
+  1949  077F                     l2175:	
+  1950  077F  1F06               	btfss	(54/8),(54)&7
+  1951  0780  2F82               	goto	u2951
+  1952  0781  2F83               	goto	u2950
+  1953  0782                     u2951:
+  1954  0782  2F08               	goto	l752
+  1955  0783                     u2950:
+  1956                           	
+  1957  0783                     l2177:	
+  1958  0783  1F86               	btfss	(55/8),(55)&7
+  1959  0784  2F86               	goto	u2961
+  1960  0785  2F87               	goto	u2960
+  1961  0786                     u2961:
+  1962  0786  2F08               	goto	l752
+  1963  0787                     u2960:
+  1964                           	
+  1965  0787                     l756:	
+  1966                           	line	168
+  1967                           ;dl.c: 166: }
+  1968                           ;dl.c: 167: }
+  1969                           ;dl.c: 168: if(RB4==0&&RB5!=0&&RB6!=0&&RB7!=0)
+  1970  0787  1A06               	btfsc	(52/8),(52)&7
+  1971  0788  2F8A               	goto	u2971
+  1972  0789  2F8B               	goto	u2970
+  1973  078A                     u2971:
+  1974  078A  2F99               	goto	l766
+  1975  078B                     u2970:
+  1976                           	
+  1977  078B                     l2179:	
+  1978  078B  1E86               	btfss	(53/8),(53)&7
+  1979  078C  2F8E               	goto	u2981
+  1980  078D  2F8F               	goto	u2980
+  1981  078E                     u2981:
+  1982  078E  2F99               	goto	l766
+  1983  078F                     u2980:
+  1984                           	
+  1985  078F                     l2181:	
+  1986  078F  1F06               	btfss	(54/8),(54)&7
+  1987  0790  2F92               	goto	u2991
+  1988  0791  2F93               	goto	u2990
+  1989  0792                     u2991:
+  1990  0792  2F99               	goto	l766
+  1991  0793                     u2990:
+  1992                           	
+  1993  0793                     l2183:	
+  1994  0793  1F86               	btfss	(55/8),(55)&7
+  1995  0794  2F96               	goto	u3001
+  1996  0795  2F97               	goto	u3000
+  1997  0796                     u3001:
+  1998  0796  2F99               	goto	l766
+  1999  0797                     u3000:
+  2000                           	line	169
+  2001                           	
+  2002  0797                     l2185:	
+  2003                           ;dl.c: 169: colloc=0;
+  2004  0797  01FB               	clrf	(_colloc)
+  2005  0798  2FDB               	goto	l773
+  2006                           	line	170
+  2007                           	
+  2008  0799                     l766:	
+  2009                           ;dl.c: 170: else if(RB4!=0&&RB5==0&&RB6!=0&&RB7!=0)
+  2010  0799  1E06               	btfss	(52/8),(52)&7
+  2011  079A  2F9C               	goto	u3011
+  2012  079B  2F9D               	goto	u3010
+  2013  079C                     u3011:
+  2014  079C  2FAD               	goto	l768
+  2015  079D                     u3010:
+  2016                           	
+  2017  079D                     l2187:	
+  2018  079D  1A86               	btfsc	(53/8),(53)&7
+  2019  079E  2FA0               	goto	u3021
+  2020  079F  2FA1               	goto	u3020
+  2021  07A0                     u3021:
+  2022  07A0  2FAD               	goto	l768
+  2023  07A1                     u3020:
+  2024                           	
+  2025  07A1                     l2189:	
+  2026  07A1  1F06               	btfss	(54/8),(54)&7
+  2027  07A2  2FA4               	goto	u3031
+  2028  07A3  2FA5               	goto	u3030
+  2029  07A4                     u3031:
+  2030  07A4  2FAD               	goto	l768
+  2031  07A5                     u3030:
+  2032                           	
+  2033  07A5                     l2191:	
+  2034  07A5  1F86               	btfss	(55/8),(55)&7
+  2035  07A6  2FA8               	goto	u3041
+  2036  07A7  2FA9               	goto	u3040
+  2037  07A8                     u3041:
+  2038  07A8  2FAD               	goto	l768
+  2039  07A9                     u3040:
+  2040                           	line	171
+  2041                           	
+  2042  07A9                     l2193:	
+  2043                           ;dl.c: 171: colloc=1;
+  2044  07A9  01FB               	clrf	(_colloc)
+  2045  07AA  1403               	bsf	status,0
+  2046  07AB  0DFB               	rlf	(_colloc),f
+  2047  07AC  2FDB               	goto	l773
+  2048                           	line	172
+  2049                           	
+  2050  07AD                     l768:	
+  2051                           ;dl.c: 172: else if(RB4!=0&&RB5!=0&&RB6==0&&RB7!=0)
+  2052  07AD  1E06               	btfss	(52/8),(52)&7
+  2053  07AE  2FB0               	goto	u3051
+  2054  07AF  2FB1               	goto	u3050
+  2055  07B0                     u3051:
+  2056  07B0  2FC2               	goto	l770
+  2057  07B1                     u3050:
+  2058                           	
+  2059  07B1                     l2195:	
+  2060  07B1  1E86               	btfss	(53/8),(53)&7
+  2061  07B2  2FB4               	goto	u3061
+  2062  07B3  2FB5               	goto	u3060
+  2063  07B4                     u3061:
+  2064  07B4  2FC2               	goto	l770
+  2065  07B5                     u3060:
+  2066                           	
+  2067  07B5                     l2197:	
+  2068  07B5  1B06               	btfsc	(54/8),(54)&7
+  2069  07B6  2FB8               	goto	u3071
+  2070  07B7  2FB9               	goto	u3070
+  2071  07B8                     u3071:
+  2072  07B8  2FC2               	goto	l770
+  2073  07B9                     u3070:
+  2074                           	
+  2075  07B9                     l2199:	
+  2076  07B9  1F86               	btfss	(55/8),(55)&7
+  2077  07BA  2FBC               	goto	u3081
+  2078  07BB  2FBD               	goto	u3080
+  2079  07BC                     u3081:
+  2080  07BC  2FC2               	goto	l770
+  2081  07BD                     u3080:
+  2082                           	line	173
+  2083                           	
+  2084  07BD                     l2201:	
+  2085                           ;dl.c: 173: colloc=2;
+  2086  07BD  3002               	movlw	(02h)
+  2087  07BE  00F0               	movwf	(??_Keypad_GetKey+0)+0
+  2088  07BF  0870               	movf	(??_Keypad_GetKey+0)+0,w
+  2089  07C0  00FB               	movwf	(_colloc)
+  2090  07C1  2FDB               	goto	l773
+  2091                           	line	174
+  2092                           	
+  2093  07C2                     l770:	
+  2094                           ;dl.c: 174: else if(RB4!=0&&RB5!=0&&RB6!=0&&RB7==0)
+  2095  07C2  1E06               	btfss	(52/8),(52)&7
+  2096  07C3  2FC5               	goto	u3091
+  2097  07C4  2FC6               	goto	u3090
+  2098  07C5                     u3091:
+  2099  07C5  2FDB               	goto	l773
+  2100  07C6                     u3090:
+  2101                           	
+  2102  07C6                     l2203:	
+  2103  07C6  1E86               	btfss	(53/8),(53)&7
+  2104  07C7  2FC9               	goto	u3101
+  2105  07C8  2FCA               	goto	u3100
+  2106  07C9                     u3101:
+  2107  07C9  2FDB               	goto	l773
+  2108  07CA                     u3100:
+  2109                           	
+  2110  07CA                     l2205:	
+  2111  07CA  1F06               	btfss	(54/8),(54)&7
+  2112  07CB  2FCD               	goto	u3111
+  2113  07CC  2FCE               	goto	u3110
+  2114  07CD                     u3111:
+  2115  07CD  2FDB               	goto	l773
+  2116  07CE                     u3110:
+  2117                           	
+  2118  07CE                     l2207:	
+  2119  07CE  1B86               	btfsc	(55/8),(55)&7
+  2120  07CF  2FD1               	goto	u3121
+  2121  07D0  2FD2               	goto	u3120
+  2122  07D1                     u3121:
+  2123  07D1  2FDB               	goto	l773
+  2124  07D2                     u3120:
+  2125                           	line	175
+  2126                           	
+  2127  07D2                     l2209:	
+  2128                           ;dl.c: 175: colloc=3;
+  2129  07D2  3003               	movlw	(03h)
+  2130  07D3  00F0               	movwf	(??_Keypad_GetKey+0)+0
+  2131  07D4  0870               	movf	(??_Keypad_GetKey+0)+0,w
+  2132  07D5  00FB               	movwf	(_colloc)
+  2133  07D6  2FDB               	goto	l773
+  2134                           	
+  2135  07D7                     l772:	
+  2136  07D7  2FDB               	goto	l773
+  2137                           	line	176
+  2138                           	
+  2139  07D8                     l771:	
+  2140  07D8  2FDB               	goto	l773
+  2141                           	
+  2142  07D9                     l769:	
+  2143  07D9  2FDB               	goto	l773
+  2144                           	
+  2145  07DA                     l767:	
+  2146                           ;dl.c: 176: while(RB4==0||RB5==0||RB6==0||RB7==0);
+  2147  07DA  2FDB               	goto	l773
+  2148                           	
+  2149  07DB                     l774:	
+  2150                           	
+  2151  07DB                     l773:	
+  2152  07DB  1E06               	btfss	(52/8),(52)&7
+  2153  07DC  2FDE               	goto	u3131
+  2154  07DD  2FDF               	goto	u3130
+  2155  07DE                     u3131:
+  2156  07DE  2FDB               	goto	l773
+  2157  07DF                     u3130:
+  2158                           	
+  2159  07DF                     l2211:	
+  2160  07DF  1E86               	btfss	(53/8),(53)&7
+  2161  07E0  2FE2               	goto	u3141
+  2162  07E1  2FE3               	goto	u3140
+  2163  07E2                     u3141:
+  2164  07E2  2FDB               	goto	l773
+  2165  07E3                     u3140:
+  2166                           	
+  2167  07E3                     l2213:	
+  2168  07E3  1F06               	btfss	(54/8),(54)&7
+  2169  07E4  2FE6               	goto	u3151
+  2170  07E5  2FE7               	goto	u3150
+  2171  07E6                     u3151:
+  2172  07E6  2FDB               	goto	l773
+  2173  07E7                     u3150:
+  2174                           	
+  2175  07E7                     l2215:	
+  2176  07E7  1F86               	btfss	(55/8),(55)&7
+  2177  07E8  2FEA               	goto	u3161
+  2178  07E9  2FEB               	goto	u3160
+  2179  07EA                     u3161:
+  2180  07EA  2FDB               	goto	l773
+  2181  07EB                     u3160:
+  2182  07EB  2FEC               	goto	l2217
+  2183                           	
+  2184  07EC                     l775:	
+  2185                           	line	177
+  2186                           	
+  2187  07EC                     l2217:	
+  2188                           ;dl.c: 177: return (keypad[rowloc][colloc]);
+  2189  07EC  087D               	movf	(_rowloc),w
+  2190  07ED  00F0               	movwf	(??_Keypad_GetKey+0)+0
+  2191  07EE  3002               	movlw	02h
+  2192  07EF                     u3175:
+  2193  07EF  1003               	clrc
+  2194  07F0  0DF0               	rlf	(??_Keypad_GetKey+0)+0,f
+  2195  07F1  3EFF               	addlw	-1
+  2196  07F2  1D03               	skipz
+  2197  07F3  2FEF               	goto	u3175
+  2198  07F4  3020               	movlw	(_keypad)&0ffh
+  2199  07F5  0770               	addwf	0+(??_Keypad_GetKey+0)+0,w
+  2200  07F6  00F1               	movwf	(??_Keypad_GetKey+1)+0
+  2201  07F7  087B               	movf	(_colloc),w
+  2202  07F8  0771               	addwf	0+(??_Keypad_GetKey+1)+0,w
+  2203  07F9  00F2               	movwf	(??_Keypad_GetKey+2)+0
+  2204  07FA  0872               	movf	0+(??_Keypad_GetKey+2)+0,w
+  2205  07FB  0084               	movwf	fsr0
+  2206  07FC  1383               	bcf	status, 7	;select IRP bank0
+  2207  07FD  0800               	movf	indf,w
+  2208  07FE  2FFF               	goto	l776
+  2209                           	
+  2210  07FF                     l2219:	
+  2211                           	line	179
+  2212                           	
+  2213  07FF                     l776:	
+  2214  07FF  0008               	return
+  2215                           	opt stack 0
+  2216                           GLOBAL	__end_of_Keypad_GetKey
+  2217  0800                     	__end_of_Keypad_GetKey:
+  2218 ;; =============== function _Keypad_GetKey ends ============
+  2219                           
+  2220                           	signat	_Keypad_GetKey,89
+  2221                           	global	_Keypad_Init
+  2222                           psect	text218,local,class=CODE,delta=2
+  2223                           global __ptext218
+  2224  04D2                     __ptext218:
+  2225                           
+  2226 ;; *************** function _Keypad_Init *****************
+  2227 ;; Defined at:
+  2228 ;;		line 136 in file "C:\Users\HP\OneDrive\Documents\PIC\Digital lock\dl.c"
+  2229 ;; Parameters:    Size  Location     Type
+  2230 ;;		None
+  2231 ;; Auto vars:     Size  Location     Type
+  2232 ;;		None
+  2233 ;; Return value:  Size  Location     Type
+  2234 ;;		None               void
+  2235 ;; Registers used:
+  2236 ;;		wreg, status,2, status,0
+  2237 ;; Tracked objects:
+  2238 ;;		On entry : 0/0
+  2239 ;;		On exit  : 0/0
+  2240 ;;		Unchanged: 0/0
+  2241 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  2242 ;;      Params:         0       0       0       0       0
+  2243 ;;      Locals:         0       0       0       0       0
+  2244 ;;      Temps:          1       0       0       0       0
+  2245 ;;      Totals:         1       0       0       0       0
+  2246 ;;Total ram usage:        1 bytes
+  2247 ;; Hardware stack levels used:    1
+  2248 ;; This function calls:
+  2249 ;;		Nothing
+  2250 ;; This function is called by:
+  2251 ;;		_main
+  2252 ;; This function uses a non-reentrant model
+  2253 ;;
+  2254                           psect	text218
+  2255                           	file	"C:\Users\HP\OneDrive\Documents\PIC\Digital lock\dl.c"
+  2256                           	line	136
+  2257                           	global	__size_of_Keypad_Init
+  2258  0009                     	__size_of_Keypad_Init	equ	__end_of_Keypad_Init-_Keypad_Init
+  2259                           	
+  2260  04D2                     _Keypad_Init:	
+  2261                           	opt	stack 7
+  2262                           ; Regs used in _Keypad_Init: [wreg+status,2+status,0]
+  2263                           	line	137
+  2264                           	
+  2265  04D2                     l2131:	
+  2266                           ;dl.c: 137: TRISB = 0xF0;
+  2267  04D2  30F0               	movlw	(0F0h)
+  2268  04D3  1683               	bsf	status, 5	;RP0=1, select bank1
+  2269  04D4  1303               	bcf	status, 6	;RP1=0, select bank1
+  2270  04D5  0086               	movwf	(134)^080h	;volatile
+  2271                           	line	138
+  2272                           	
+  2273  04D6                     l2133:	
+  2274                           ;dl.c: 138: OPTION_REG&=0X7F;
+  2275  04D6  307F               	movlw	(07Fh)
+  2276  04D7  00F0               	movwf	(??_Keypad_Init+0)+0
+  2277  04D8  0870               	movf	(??_Keypad_Init+0)+0,w
+  2278  04D9  0581               	andwf	(129)^080h,f	;volatile
+  2279                           	line	139
+  2280                           	
+  2281  04DA                     l743:	
+  2282  04DA  0008               	return
+  2283                           	opt stack 0
+  2284                           GLOBAL	__end_of_Keypad_Init
+  2285  04DB                     	__end_of_Keypad_Init:
+  2286 ;; =============== function _Keypad_Init ends ============
+  2287                           
+  2288                           	signat	_Keypad_Init,88
+  2289                           psect	text219,local,class=CODE,delta=2
+  2290                           global __ptext219
+  2291  0000                     __ptext219:
+  2292                           	global	btemp
+  2293  007E                     	btemp set 07Eh
+  2294                           
+  2295                           	DABS	1,126,2	;btemp
+  2296                           	global	wtemp0
+  2297  007E                     	wtemp0 set btemp
+
+
+HI-TECH Software PICC Macro Assembler V9.81 build 7503 
+Symbol Table                                                                                   Thu Oct 10 09:40:16 2024
+
+                     pc 0002            ?_LCD_Command 0070                      fsr 0004             ?_LCD_String 0070  
+                   l720 06ED                     l721 06EE                     l722 06EE                     l731 064D  
+                   l715 0677                     l740 04EA                     l716 06EC                     l725 0570  
+                   l717 06EB                     l750 0707                     l734 053E                     l718 06C3  
+                   l743 04DA                     l751 0777                     l735 052D                     l719 06D2  
+                   l760 075F                     l752 0708                     l728 05F3                     l736 054B  
+                   l753 0730                     l737 054B                     l770 07C2                     l762 075A  
+                   l746 06F5                     l771 07D8                     l763 0777                     l755 072E  
+                   l747 06F5                     l772 07D7                     l756 0787                     l780 0573  
+                   l773 07DB                     l765 0772                     l757 0747                     l749 0706  
+                   l774 07DB                     l766 0799                     l782 0592                     l775 07EC  
+                   l767 07DA                     l759 0743                     l783 0593                     l776 07FF  
+                   l768 07AD                     l784 0599                     l769 07D9                     l779 0574  
+                   _RB0 0030                     _RB1 0031                     _RC0 0038                     _RB2 0032  
+                   _RB3 0033                     _RC2 003A                     _RB4 0034                     _RC3 003B  
+                   _RB5 0035                     _RB6 0036                     _RB7 0037                     fsr0 0004  
+                   indf 0000                    l2201 07BD                    l2131 04D2                    l2211 07DF  
+                  l2203 07C6                    l2133 04D6                    l2213 07E3                    l2205 07CA  
+                  l2141 0701                    l2221 0572                    l2301 0677                    l2215 07E7  
+                  l2207 07CE                    l2151 073A                    l2143 0722                    l2135 06F1  
+                  l2223 0574                    l2231 059B                    l2311 0697                    l2303 067D  
+                  l2217 07EC                    l2209 07D2                    l2161 0755                    l2153 073E  
+                  l2145 0726                    l2137 06F9                    l2225 0588                    l2241 05B7  
+                  l2233 059E                    l2321 06B9                    l2313 069B                    l2305 0685  
+                  l2219 07FF                    l2171 0772                    l2163 075A                    l2155 0743  
+                  l2147 072A                    l2139 06FD                    l2227 0593                    l2243 05D7  
+                  l2235 05A7                    l2251 05F5                    l2331 06D2                    l2323 06BF  
+                  l2315 06A1                    l2307 0689                    l2181 078F                    l2173 077B  
+                  l2165 0765                    l2157 074D                    l2149 0736                    l2229 0599  
+                  l2245 05D8                    l2237 05A8                    l2261 0611                    l2253 05F8  
+                  l2333 06DE                    l2325 06C3                    l2317 06A4                    l2309 068F  
+                  l2191 07A5                    l2183 0793                    l2175 077F                    l2167 0769  
+                  l2159 0751                    l2247 05E4                    l2239 05B4                    l2263 0631  
+                  l2255 0601                    l2271 054C                    l2335 06E3                    l2327 06C8  
+                  l2319 06B4                    l2193 07A9                    l2185 0797                    l2177 0783  
+                  l2169 076D                    l2249 05E7                    l2265 0632                    l2257 0602  
+                  l2273 0564                    l2281 052D                    l2337 06E9                    l2329 06CE  
+                  l2195 07B1                    l2187 079D                    l2179 078B                    l2267 063E  
+                  l2259 060E                    l2275 04DB                    l2283 0539                    l2291 065B  
+                  l2197 07B5                    l2189 07A1                    l2269 0641                    l2277 04E1  
+                  l2285 053E                    l2293 065C                    l2199 07B9                    l2279 052C  
+                  l2295 065F                    l2287 064E                    l2297 0664                    l2289 0658  
+                  l2299 066A                    STR_1 0009                    STR_2 0019                    STR_3 0022  
+                  STR_4 0009                    u3000 0797                    u3001 0796                    u3010 079D  
+                  u3011 079C                    u3100 07CA                    u3020 07A1                    u3101 07C9  
+                  u3021 07A0                    u3110 07CE                    u3030 07A5                    u3111 07CD  
+                  u3031 07A4                    u3120 07D2                    u3040 07A9                    u3121 07D1  
+                  u3041 07A8                    u3130 07DF                    u3050 07B1                    u3131 07DE  
+                  u3051 07B0                    u3140 07E3                    u3060 07B5                    u3220 054A  
+                  u3141 07E2                    u3061 07B4                    u3205 05CC                    u3221 0549  
+                  u3150 07E7                    u3070 07B9                    u3230 0689                    u3151 07E6  
+                  u3071 07B8                    u3215 0626                    u3160 07EB                    u3080 07BD  
+                  u3240 06A1                    u3161 07EA                    u3081 07BC                    u3241 06A0  
+                  u3090 07C6                    u3250 06B4                    u3091 07C5                    u3307 0608  
+                  u3251 06B3                    u2700 06F9                    u3180 0588                    u2701 06F8  
+                  u3181 0587                    u3317 0617                    u2710 06FD                    u3190 0591  
+                  u3175 07EF                    u2711 06FC                    u3191 0590                    u3327 0638  
+                  u2800 072E                    u2720 0701                    u2801 072D                    u2721 0700  
+                  u3337 0647                    u2810 0736                    u2730 0705                    u2811 0735  
+                  u2731 0704                    u3347 05AE                    u3267 0670                    u2900 0769  
+                  u2820 073A                    u2740 0711                    u2901 0768                    u2821 0739  
+                  u2741 070D                    u3357 05BD                    u3277 06D8                    u2910 076D  
+                  u2830 073E                    u2750 071B                    u2911 076C                    u2831 073D  
+                  u2751 0717                    u3367 05DE                    u3287 04E5                    u2920 0771  
+                  u2840 0742                    u2921 0770                    u2841 0741                    u3377 05ED  
+                  u3297 056A                    u2930 077B                    u2850 074D                    u2770 0722  
+                  u2754 0714                    u2931 077A                    u2851 074C                    u2771 0721  
+                  u2940 077F                    u2860 0751                    u2780 0726                    u2764 071E  
+                  u2941 077E                    u2861 0750                    u2781 0725                    u2950 0783  
+                  u2870 0755                    u2790 072A                    u2951 0782                    u2871 0754  
+                  u2791 0729                    u2960 0787                    u2880 0759                    u2961 0786  
+                  u2881 0758                    u2970 078B                    u2890 0765                    u2971 078A  
+                  u2891 0764                    u2980 078F                    u2981 078E                    u2990 0793  
+                  u2991 0792                    _main 064E      __size_of_LCD_Clear 0010                    btemp 007E  
+                  start 0000  __size_of_Keypad_GetKey 010F        __end_of_LCD_Char 064E        __end_of_LCD_Init 0571  
+          LCD_Char@data 0073                   ?_main 0070           ??_Keypad_Init 0070                   _PORTB 0006  
+                 _PORTD 0008                   _TRISB 0086                   _TRISD 0088                   _index 007C  
+                 pclath 000A                   status 0003                   wtemp0 007E     __size_of_LCD_String 0021  
+          __end_of_main 06F1                  ??_main 0077       __end_of_LCD_Clear 04EB           _Keypad_GetKey 06F1  
+   __end_of_Keypad_Init 04DB                  _TRISB0 0430                  _colloc 007B                  _keypad 0020  
+                _rowloc 007D    __size_of_LCD_Command 005A                  _strcmp 0571          ?_Keypad_GetKey 0070  
+      _entered_passcode 0035               ?_LCD_Char 0070               ?_LCD_Init 0070          __pcstackCOMMON 0070  
+          __pidataBANK0 04FC            ??_LCD_String 0074             _Keypad_Init 04D2              __pbssBANK0 0035  
+            ??_LCD_Char 0070              ??_LCD_Init 0074      __end_of_LCD_String 054C              __pmaintext 064E  
+               ?_strcmp 0070         ??_Keypad_GetKey 0070           LCD_String@str 0075         __size_of_strcmp 0029  
+             _LCD_Clear 04DB                 main@key 007A    end_of_initialization 0527                 init_ram 04EF  
+        LCD_Command@cmd 0073                 strcmp@r 0074              ?_LCD_Clear 0070       __size_of_LCD_Char 005A  
+     __size_of_LCD_Init 0025           ??_LCD_Command 0070            ?_Keypad_Init 0070          __end_of_strcmp 059A  
+   start_initialization 0511             __pdataBANK0 0020                ??_strcmp 0072     __end_of_LCD_Command 05F4  
+           __pbssCOMMON 007B             ??_LCD_Clear 0074               __ptext211 052B               __ptext212 04DB  
+             __ptext213 054C               __ptext214 05F4               __ptext215 059A               __ptext216 0571  
+             __ptext217 06F1               __ptext218 04D2               __ptext219 0000               __pstrings 0003  
+ __end_of_Keypad_GetKey 0800        _correct_passcode 0030                _LCD_Char 05F4                _LCD_Init 054C  
+           _LCD_Command 059A             __stringbase 0008    __size_of_Keypad_Init 0009               init_fetch 04EB  
+         __size_of_main 00A3              _LCD_String 052B               stringcode 0003              _OPTION_REG 0081  
+              strcmp@s1 0075                strcmp@s2 0070                stringdir 0003                stringtab 0003  
